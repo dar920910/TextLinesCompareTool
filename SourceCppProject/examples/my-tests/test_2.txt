@@ -1,0 +1,24 @@
+/   t e  s   t    2   /
+vvvv/pppp
+                             /test-root/test-folder-2/
+/aaa/eee/
+  # zzzzz
+sss/ggg
+
+                                                                         /test-root/test-folder-1/
+                                            /a/b/v/tg/y///e/ghdr/hdj//tertr/cascsdfasdf/ttyuiity/qqqwqc/ ## hhhhhh
+
+
+dddd/wwww
+
+
+/dd/
+
+
+/tt/yy/
+
+
+/oo/pp/ssssss
+
+    /test-root/test-folder-3/
+    #/test-root/test-folder-1/

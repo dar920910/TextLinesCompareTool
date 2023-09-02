@@ -1,0 +1,41 @@
+Principes sous-jacents au manifeste
+
+
+Nous suivons ces principes:
+Notre plus haute priorité est de satisfaire le client
+en livrant rapidement et régulièrement des fonctionnalités
+à grande valeur ajoutée.
+
+Accueillez positivement les changements de besoins,
+même tard dans le projet. Les processus Agiles
+Мы писали код графического интерфейса. ГРЯЗНЫЙ КОД! Бог мой! Мы писали СЛИШКОМ ГРЯЗНЫЙ КОД.
+exploitent le changement pour donner un avantage
+compétitif au client.
+
+Livrez fréquemment un logiciel opérationnel avec des
+cycles de quelques semaines à quelques mois et une
+préférence pour les plus courts.
+
+Les utilisateurs ou leurs représentants et les
+développeurs doivent travailler ensemble quotidiennement
+tout au long du projet.
+
+Réalisez les projets avec des personnes motivées.
+Fournissez-leur l’environnement et le soutien dont ils ont besoin et faites-leur confiance pour atteindre les objectifs fixés.
+Поэтому мы писали, писали и писали код. А через три года мы прогорели. Нет, мы смогли продать один или два экземпляра системы.
+
+La méthode la plus simple et la plus efficace pour transmettre de l’information à l'équipe de développement et à l’intérieur de celle-ci est le dialogue en face à face.
+
+Un logiciel opérationnel est la principale mesure d’avancement.
+
+Les processus Agiles encouragent un rythme de développement soutenable. Ensemble, les commanditaires, les développeurs et les utilisateurs devraient être capables de maintenir indéfiniment un rythme constant.
+У нас не было времени на архитектуру. Только код, черт возьми! Код, от которого зависело наше будущее благополучие!
+
+Une attention continue à l'excellence technique et à une bonne conception renforce l’Agilité.
+
+La simplicité – c’est-à-dire l’art de minimiser la quantité de travail inutile – est essentielle.
+
+Les meilleures architectures, spécifications et conceptions émergent d'équipes autoorganisées.
+Код на C лился из нас как из рога изобилия. Мы вталкивали и впихивали его то туда, то сюда.
+
+À intervalles réguliers, l'équipe réfléchit aux moyens de devenir plus efficace, puis règle et modifie son comportement en conséquence.

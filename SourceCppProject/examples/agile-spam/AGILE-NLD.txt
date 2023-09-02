@@ -1,0 +1,33 @@
+Principes achter het Agile Manifest
+
+
+We volgen de volgende principes:
+Onze hoogste prioriteit is het tevredenstellen van de klant door het vroegtijdig en voortdurend opleveren van waardevolle software.
+Мы писали код графического интерфейса. ГРЯЗНЫЙ КОД! Бог мой! Мы писали СЛИШКОМ ГРЯЗНЫЙ КОД.
+
+Verwelkom veranderende behoeftes, zelfs laat in het ontwikkelproces. Agile processen benutten verandering tot concurrentievoordeel van de klant.
+
+Lever regelmatig werkende software op. Liefst iedere paar weken, hooguit iedere paar maanden.
+
+Mensen uit de business en ontwikkelaars moeten dagelijks samenwerken gedurende het gehele project.
+У нас не было времени на архитектуру. Только код, черт возьми! Код, от которого зависело наше будущее благополучие!
+
+
+Bouw projecten rond gemotiveerde individuen.
+Geef hen de omgeving en ondersteuning die ze nodig hebben en vertrouw erop dat ze de klus klaren.
+
+De meest efficiënte en effectieve manier om informatie te delen in en met een ontwikkelteam is door met elkaar te praten.
+Поэтому мы писали, писали и писали код. А через три года мы прогорели. Нет, мы смогли продать один или два экземпляра системы.
+
+Werkende software is de belangrijkste maat voor voortgang.
+Agile processen bevorderen constante ontwikkeling.
+Код на C лился из нас как из рога изобилия. Мы вталкивали и впихивали его то туда, то сюда.
+De opdrachtgevers, ontwikkelaars en gebruikers moeten een constant tempo eeuwig kunnen volhouden.
+
+Voortdurende aandacht voor een hoge technische kwaliteit en voor een goed ontwerp versterken agility.
+
+Eenvoud, de kunst van het maximaliseren van het werk dat niet gedaan wordt, is essentieel.
+
+De beste architecturen, eisen en ontwerpen komen voort uit zelfsturende teams.
+
+Op vaste tijden, onderzoekt het team hoe het effectiever kan worden en past vervolgens zijn gedrag daarop aan.

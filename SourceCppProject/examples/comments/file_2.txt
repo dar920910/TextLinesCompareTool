@@ -1,0 +1,7 @@
+AAA /*part1*//BBB /*part2*//CCC      /*part3*//DDD      /*part4*/  
+EEEEE/FFFFF/GGGGG/HHHHH
+IIII/JJJJ/KKKK
+LLLLL/MMMM/NNNN/OOOOO
+PPPPPP/QQQQQ/RRRRR/SSSSSS
+TTTT/UUUU/VVVV
+     WWW/*part1*/    //*part2*/XXX //*part3*/YYY   //*part4*/ZZZ  # common example

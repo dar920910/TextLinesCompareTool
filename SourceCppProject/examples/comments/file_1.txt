@@ -1,0 +1,7 @@
+       /*     common 1    */    AAA   /BBB       /CCC       /DDD      /*    C-style-comment    */   # for example   
+EEE/FFF/GGG/HHH
+III/JJJ/KKK
+LLL/MMM/NNN/OOO
+PPP/QQQ/RRR/SSS
+TTT/UUU/VVV
+/*for example*/WWW     /XXX      /YYY /ZZZ          # common 2

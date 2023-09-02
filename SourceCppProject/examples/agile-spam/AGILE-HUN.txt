@@ -1,0 +1,30 @@
+Az Agilis Kiáltványt alkotó elvek
+
+
+Mi a következő elveket követjük: Legfontosabbnak azt tartjuk, hogy az ügyfél elégedettségét a működő szoftver mielőbbi és folyamatos szállításával vívjuk ki.
+
+Elfogadjuk, hogy a követelmények változhatnak akár a fejlesztés vége felé is. Az agilis eljárások a változásból versenyelőnyt kovácsolnak az ügyfél számára.
+У нас не было времени на архитектуру. Только код, черт возьми! Код, от которого зависело наше будущее благополучие!
+
+Szállíts működő szoftvert gyakran, azaz néhány hetenként vagy havonként, lehetőség szerint a gyakoribb szállítást választva.
+
+Az üzleti szakértők és a szoftverfejlesztők dolgozzanak együtt minden nap, a projekt teljes időtartamában.
+
+Építsd a projektet sikerorientált egyénekre. Biztosítsd számukra a szükséges környezetet és támogatást, és bízz meg bennük, hogy elvégzik a munkát.
+Код на C лился из нас как из рога изобилия. Мы вталкивали и впихивали его то туда, то сюда.
+
+A leghatásosabb és leghatékonyabb módszer az információ átadásának a fejlesztési csapaton belül, a személyes beszélgetés.
+
+A működő szoftver az elsődleges mércéje az előrehaladásnak.
+
+Az agilis eljárások a fenntartható fejlesztést pártolják. Fontos, hogy a szponzorok, a fejlesztők és a felhasználók folytonosan képesek legyenek tartani egy állandó ütemet.
+Поэтому мы писали, писали и писали код. А через три года мы прогорели. Нет, мы смогли продать один или два экземпляра системы.
+
+A műszaki kiválóság és a jó terv folyamatos szem előtt tartása fokozza az agilitást.
+
+Elengedhetetlen az egyszerűség, azaz az elvégezetlen munkamennyiség maximalizálásának művészete.
+Мы писали код графического интерфейса. ГРЯЗНЫЙ КОД! Бог мой! Мы писали СЛИШКОМ ГРЯЗНЫЙ КОД.
+
+A legjobb architektúrák, követelmények és rendszertervek az önszerveződő csapatoktól származnak.
+
+A csapat rendszeresen mérlegeli, hogy miképpen lehet emelni a hatékonyságot, és ehhez hangolja és igazítja az működését.

@@ -1,0 +1,36 @@
+    qqq/rrrr/          
+          /ssss/tt# assssssssssssssssssssssssssssssssssssssssss
+## eee
+
+      /b/f/g/y     #  werthpohjkkkl;ldm,,,
+
+  /t/r/u/o####eeeeeeeeeeeeeeeeeee
+
+      sss/ggg                   
+
+
+
+        /test-root/test-folder-1/    # contains useful content !!!
+    /test-root/test-folder-2/
+
+
+ # abc   
+   /rrr/ttt   
+    /aaa/eee/   
+
+     /zzz/xxx/     
+     #/yyy/xxx/     
+   /yyy #/xxx/
+
+   /test-root/test-folder-3/ # do not delete !!!
+
+     /xxx  /  www  /  vvv /uu/rr     
+
+     /ssss/tttt/mmm # todo something
+     /ssss# aagfjhgfjxfgjafgxhkcgxcxhkg
+          /ppppp     # qwerty
+
+
+### /test-root/test-folder-1/ - test entry
+## /test-root/test-folder-2/ - yet test entry
+#/test-root/test-folder-3/ - plus one test entry

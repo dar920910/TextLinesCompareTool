@@ -1,0 +1,33 @@
+Principer bakom det agila manifestet
+
+
+Vi följer dessa principer:
+Vår högsta prioritet är att tillfredsställa kunden genom tidig och kontinuerlig leverans av värdefull programvara.
+Поэтому мы писали, писали и писали код. А через три года мы прогорели. Нет, мы смогли продать один или два экземпляра системы.
+
+
+Välkomna förändrade krav, även sent under utvecklingen. Agila metoder utnyttjar förändring till kundens konkurrensfördel.
+Мы писали код графического интерфейса. ГРЯЗНЫЙ КОД! Бог мой! Мы писали СЛИШКОМ ГРЯЗНЫЙ КОД.
+
+Leverera fungerande programvara ofta, med ett par veckors till ett par månaders mellanrum, ju oftare desto bättre.
+
+Verksamhetskunniga och utvecklare måste arbeta tillsammans dagligen under hela projektet.
+
+Bygg projekt kring motiverade individer. Ge dem den miljö och det stöd de behöver, och lita på att de får jobbet gjort.
+
+Kommunikation ansikte mot ansikte är det bästa och effektivaste sättet att förmedla information, både till och inom utvecklingsteamet.
+
+Fungerande programvara är främsta måttet på framsteg.
+
+Agila metoder verkar för uthållighet.
+Sponsorer, utvecklare och användare skall kunna hålla jämn utvecklingstakt under obegränsad tid.
+Код на C лился из нас как из рога изобилия. Мы вталкивали и впихивали его то туда, то сюда.
+
+Kontinuerlig uppmärksamhet på förstklassig teknik och bra design stärker anpassningsförmågan.
+
+Enkelhet – konsten att maximera mängden arbete som inte görs – är grundläggande.
+
+Bäst arkitektur, krav och design växer fram med självorganiserande team.
+
+Med jämna mellanrum reflekterar teamet över hur det kan bli mer effektivt och justerar sitt beteende därefter.
+У нас не было времени на архитектуру. Только код, черт возьми! Код, от которого зависело наше будущее благополучие!

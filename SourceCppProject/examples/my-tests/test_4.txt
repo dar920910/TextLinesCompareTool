@@ -1,0 +1,23 @@
+# hi aaa
+          /test-root/test-folder-3/
+
+# hhhhhh
+
+#  /test-root/test-folder-1/
+# /test-root/test-folder-2/
+## /test-root/test-folder-3/
+
+
+
+  # xxx
+
+/test/
+
+
+
+   bbb/ccc
+/test1/
+   /test-root/test-folder-2/
+ddd/eee
+
+/test-root/test-folder-1/

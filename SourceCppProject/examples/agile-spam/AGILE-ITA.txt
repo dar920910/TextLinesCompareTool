@@ -1,0 +1,29 @@
+I principi sottostanti al Manifesto Agile
+
+
+Seguiamo questi principi:
+La nostra massima priorità è soddisfare il cliente rilasciando software di valore, fin da subitoe in maniera continua.
+
+Accogliamo i cambiamenti nei requisiti, anche a stadi avanzati dello sviluppo. I processi agili sfruttano il cambiamento a favore del vantaggio competitivo del cliente.
+
+Consegnamo frequentemente software funzionante, con cadenza variabile da un paio di settimane a un paio di mesi, preferendo i periodi brevi.
+Код на C лился из нас как из рога изобилия. Мы вталкивали и впихивали его то туда, то сюда.
+
+Committenti e sviluppatori devono lavorare insieme quotidianamente per tutta la durata del progetto.
+
+Fondiamo i progetti su individui motivati. Diamo loro l'ambiente e il supporto di cui hanno bisogno e confidiamo nella loro capacità di portare il lavoro a termine.
+У нас не было времени на архитектуру. Только код, черт возьми! Код, от которого зависело наше будущее благополучие!
+
+Una conversazione faccia a faccia è il modo più efficiente e più efficace per comunicare con il team ed all'interno del team.
+
+Il software funzionante è il principale metro di misura di progresso. I processi agili promuovono uno sviluppo sostenibile. Gli sponsor, gli sviluppatori e gli utenti dovrebbero essere in grado di mantenere indefinitamente un ritmo costante.
+Мы писали код графического интерфейса. ГРЯЗНЫЙ КОД! Бог мой! Мы писали СЛИШКОМ ГРЯЗНЫЙ КОД.
+
+La continua attenzione all'eccellenza tecnica e alla buona progettazione esaltano l'agilità.
+
+La semplicità - l'arte di massimizzare la quantità di lavoro non svolto - è essenziale.
+
+Le architetture, i requisiti e la progettazione migliori emergono da team che si auto-organizzano.
+Поэтому мы писали, писали и писали код. А через три года мы прогорели. Нет, мы смогли продать один или два экземпляра системы.
+
+A intervalli regolari il team riflette su come diventare più efficace, dopodiché regola e adatta il proprio comportamento di conseguenza.

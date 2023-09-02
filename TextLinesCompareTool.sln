@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextLinesComparing.Library", "TextLinesComparing.Library\TextLinesComparing.Library.csproj", "{79A8F3BE-EEF1-4B8D-A0B0-28FBADE99474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextLinesComparing.Testing", "TextLinesComparing.Testing\TextLinesComparing.Testing.csproj", "{7F890161-435D-4D59-A55D-89653122B3DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextLinesComparing.App.CLI", "TextLinesComparing.App.CLI\TextLinesComparing.App.CLI.csproj", "{AF424BFA-691B-481B-860E-C5A096CACD9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextLinesComparing.App.Web", "TextLinesComparing.App.Web\TextLinesComparing.App.Web.csproj", "{AA343ABD-3EF7-4057-8CF9-BE37A95DCCC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79A8F3BE-EEF1-4B8D-A0B0-28FBADE99474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A8F3BE-EEF1-4B8D-A0B0-28FBADE99474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A8F3BE-EEF1-4B8D-A0B0-28FBADE99474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A8F3BE-EEF1-4B8D-A0B0-28FBADE99474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F890161-435D-4D59-A55D-89653122B3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F890161-435D-4D59-A55D-89653122B3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F890161-435D-4D59-A55D-89653122B3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F890161-435D-4D59-A55D-89653122B3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF424BFA-691B-481B-860E-C5A096CACD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF424BFA-691B-481B-860E-C5A096CACD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF424BFA-691B-481B-860E-C5A096CACD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF424BFA-691B-481B-860E-C5A096CACD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA343ABD-3EF7-4057-8CF9-BE37A95DCCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA343ABD-3EF7-4057-8CF9-BE37A95DCCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA343ABD-3EF7-4057-8CF9-BE37A95DCCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA343ABD-3EF7-4057-8CF9-BE37A95DCCC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

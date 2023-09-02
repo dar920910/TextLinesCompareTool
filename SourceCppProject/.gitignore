@@ -1,0 +1,5 @@
+build/
+.vscode/
+SendCodeLinesExplorer.code-workspace
+*.html
+*.result
