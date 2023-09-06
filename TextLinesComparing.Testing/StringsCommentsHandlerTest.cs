@@ -5,7 +5,7 @@ namespace TextLinesComparing.Testing;
 public class StringsCommentsHandlerTest
 {
     [Test]
-    public void TrimSingleStringComment_TestCase()
+    public void DeleteSingleStringComment_TestCase()
     {
         Assert.Multiple(() =>
         {
@@ -27,8 +27,18 @@ public class StringsCommentsHandlerTest
     }
 
     [Test]
-    [Ignore("SKIP this test until fixing errors in TrimSingleStringComment() implementation")]
-    public void CutAllCommentsInsideString_TestCase_1()
+    public void DeleteAllCommentsFromString_TestCase_0()
+    {
+        const string artifact = "$/* comment */$";
+
+        string actual_artifact = StringsCommentsHandler.TrimWrappedCommentsInsideString(artifact);
+        string expected_artifact = "$$";
+
+        Assert.That(actual_artifact, Is.EqualTo(expected_artifact));
+    }
+
+    [Test]
+    public void DeleteAllCommentsFromString_TestCase_1()
     {
         const string artifact = "0 1 /* 1 */ 2 /* 2 */ 3 4 5 6 7 /* 7 */ 8 /* 8 */ 9";
 
@@ -39,8 +49,7 @@ public class StringsCommentsHandlerTest
     }
 
     [Test]
-    [Ignore("SKIP this test until fixing errors in TrimSingleStringComment() implementation")]
-    public void CutAllCommentsInsideString_TestCase_2()
+    public void DeleteAllCommentsFromString_TestCase_2()
     {
         const string artifact = "0 1 /*step1*/ 2 /*step2*/ 3 /*step3*/ 4 5";
 
@@ -51,8 +60,7 @@ public class StringsCommentsHandlerTest
     }
 
     [Test]
-    [Ignore("SKIP this test until fixing errors in TrimSingleStringComment() implementation")]
-    public void CutAllCommentsInsideString_TestCase_3()
+    public void DeleteAllCommentsFromString_TestCase_3()
     {
         const string artifact = "/* comment */   0 1 2 3 4 5";
 
@@ -63,8 +71,7 @@ public class StringsCommentsHandlerTest
     }
 
     [Test]
-    [Ignore("SKIP this test until fixing errors in TrimSingleStringComment() implementation")]
-    public void CutAllCommentsInsideString_TestCase_4()
+    public void DeleteAllCommentsFromString_TestCase_4()
     {
         const string artifact = "0 1 2 3 4 5   /* comment */\n";
 
@@ -75,8 +82,7 @@ public class StringsCommentsHandlerTest
     }
 
     [Test]
-    [Ignore("SKIP this test until fixing errors in TrimSingleStringComment() implementation")]
-    public void CutAllCommentsInsideString_TestCase_5()
+    public void DeleteAllCommentsFromString_TestCase_5()
     {
         const string artifact = "/* comment */0 1 2 /*   comment   */ 3 4 5/* comment */\n";
 

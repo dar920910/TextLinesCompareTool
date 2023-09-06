@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace TextLinesComparing.Library;
 
 public static class StringsCommentsHandler
@@ -25,52 +27,49 @@ public static class StringsCommentsHandler
 
     public static string TrimWrappedCommentsInsideString(string artifactString)
     {
+        List<string> detectedComments = new();
+
         int artifactBegIndex = 0;
         int artifactEndIndex = artifactString.Length - 1;
 
-        int commentBegIndex = artifactBegIndex;
-        int commentEndIndex = artifactBegIndex;
-
-        while (commentBegIndex != artifactEndIndex)
+        int currentIndex = artifactBegIndex;
+        while (currentIndex != artifactEndIndex)
         {
-            if (IsCommentSlash(artifactString.ElementAt(commentBegIndex)))
+            int commentBegSlashIndex = currentIndex;
+            if (IsCommentSlash(artifactString.ElementAt(commentBegSlashIndex)))
             {
-                if (IsCommentAsterisk(artifactString.ElementAt(commentBegIndex + 1)))
+                int commentBegAsteriskIndex = currentIndex + 1;
+                if (IsCommentAsterisk(artifactString.ElementAt(commentBegAsteriskIndex)))
                 {
-                    commentEndIndex = commentBegIndex;
-
-                    while (commentEndIndex != artifactEndIndex)
+                    int currentCommentIndex = currentIndex;
+                    while (currentCommentIndex != artifactEndIndex)
                     {
-                        char currentCharacter = artifactString.ElementAt(commentEndIndex);
-
-                        if (IsCommentAsterisk(currentCharacter))
+                        int commentEndAsteriskIndex = currentCommentIndex;
+                        if (IsCommentAsterisk(artifactString.ElementAt(commentEndAsteriskIndex)))
                         {
-                            if (IsCommentSlash(artifactString.ElementAt(currentCharacter + 1)))
+                            int commentEndSlashIndex = currentCommentIndex + 1;
+                            if (IsCommentSlash(artifactString.ElementAt(commentEndSlashIndex)))
                             {
-                                commentEndIndex++;
+                                detectedComments.Add(artifactString[commentBegSlashIndex..(commentEndSlashIndex + 1)]);
+                                currentIndex = commentEndSlashIndex;
                                 break;
                             }
                         }
 
-                        commentEndIndex++;
+                        currentCommentIndex++;
                     }
-
-                    CutCommentInsideString(artifactString, commentBegIndex, commentEndIndex + 1);
                 }
             }
 
-            commentBegIndex++;
+            currentIndex++;
+        }
+
+        foreach (string comment in detectedComments)
+        {
+            artifactString = artifactString.Replace(comment, string.Empty);
         }
 
         return artifactString;
-    }
-
-
-    private static void CutCommentInsideString(string artifactString, int commentBegIndex, int commentEndIndex)
-    {
-        int commentLength = commentEndIndex - commentBegIndex;
-        string commentSubstring = artifactString.Substring(commentBegIndex, commentLength);
-        artifactString.Replace(commentSubstring, string.Empty);
     }
 
     private static bool IsCommentSlash(char artifactCharacter)
