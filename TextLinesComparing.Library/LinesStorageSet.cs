@@ -2,13 +2,13 @@ namespace TextLinesComparing.Library;
 
 public class LinesStorageSet
 {
-    public readonly string Name;
+    public string Name { get; set; }
     private SortedSet<string> _LinesSet;
 
     public LinesStorageSet()
     {
-        Name = "Lines Storage Set";
         _LinesSet = new SortedSet<string>();
+        Name = "Lines Storage Set";
     }
 
     public LinesStorageSet(IEnumerable<string> sequence, string name = "Lines Storage Set")

@@ -2,7 +2,7 @@ namespace TextLinesComparing.Library;
 
 public class LinesStorageMap
 {
-    public readonly string Name;
+    public string Name { get; set; }
     private Dictionary<int, string> _LinesMap;
 
     public LinesStorageMap()
