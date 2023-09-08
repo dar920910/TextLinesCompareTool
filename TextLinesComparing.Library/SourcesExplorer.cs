@@ -3,10 +3,10 @@ namespace TextLinesComparing.Library;
 public class SourcesExplorer
 {
     private List<SourceInfo> _Sources;
-    public SourcesExplorer(string[] sources)
+    public SourcesExplorer(List<string> sources)
     {
         _Sources = new List<SourceInfo>();
-        foreach (var source in sources)
+        foreach (string source in sources)
         {
             _Sources.Add(new SourceInfo(source));
         }

@@ -6,7 +6,7 @@ public class OutputWebPrinter : OutputAbstractDevice
 {
     private StreamWriter _WebOutputFileStream;
 
-    OutputWebPrinter()
+    public OutputWebPrinter()
     {
         string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + ".html";
         _WebOutputFileStream = new(outputFileName);

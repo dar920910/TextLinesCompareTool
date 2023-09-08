@@ -14,10 +14,10 @@ public class AppDatetimeService
         return DateTime.Now;
     }
 
-    public string GetExecutionElapsedTimeMessage()
+    public void PrintExecutionElapsedTimeMessage()
     {
         DateTime appFinishDatetime = GetClockDatetime();
-        return $"Program's Execution Time :\nStart: {_AppStartDatetime},\nFinish: {appFinishDatetime}\n";
+        Console.WriteLine($"Program's Execution Time :\nStart: {_AppStartDatetime},\nFinish: {appFinishDatetime}\n");
     }
 
     public string GetCurrentDatetimeText()
