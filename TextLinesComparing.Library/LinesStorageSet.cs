@@ -17,9 +17,9 @@ public class LinesStorageSet
         Name = name;
     }
 
-    public void PutContent(string content)
+    public void PutContent(LineInfo target_info)
     {
-        _LinesSet.Add(content);
+        _LinesSet.Add(target_info.Content.Value);
     }
 
     public SortedSet<string> Content

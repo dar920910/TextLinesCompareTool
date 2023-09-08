@@ -19,9 +19,9 @@ public class LinesStorageSetTest
     {
         LinesStorageSet set = new(new string[] { "A", "B", "C" });
 
-        set.PutContent("D");
-        set.PutContent("E");
-        set.PutContent("F");
+        set.PutContent(new LineInfo("D"));
+        set.PutContent(new LineInfo("E"));
+        set.PutContent(new LineInfo("F"));
 
         Assert.That(set.Content, Is.EqualTo(
             new string[] { "A", "B", "C", "D", "E", "F" }));

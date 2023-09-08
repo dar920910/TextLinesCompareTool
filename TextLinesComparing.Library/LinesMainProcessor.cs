@@ -67,7 +67,7 @@ public static class LinesMainProcessor
         {
             if (IsUniqueLineInSource(target_element, compared_content))
             {
-                extractedUniqueLines.PutContent(target_element);
+                extractedUniqueLines.PutContent(new LineInfo(target_element));
             }
         }
 
