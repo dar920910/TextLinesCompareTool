@@ -4,44 +4,48 @@ namespace TextLinesComparing.Library;
 
 public class OutputWebPrinter : OutputAbstractDevice
 {
+    private const string RESULT_FILE_EXTENSION = ".html";
+    private readonly string _OutputDirectoryPath;
     private StreamWriter _WebOutputFileStream;
 
     public OutputWebPrinter()
     {
-        string outputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
-        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + ".html";
+        _OutputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
 
-        if (Directory.Exists(outputDirectoryPath) is false)
+        if (Directory.Exists(_OutputDirectoryPath) is false)
         {
-            Directory.CreateDirectory(outputDirectoryPath);
+            Directory.CreateDirectory(_OutputDirectoryPath);
         }
-
-        string outputFilePath = Path.Combine(outputDirectoryPath, outputFileName);
-        _WebOutputFileStream = new(outputFilePath);
     }
-
-    ~OutputWebPrinter()
-    {
-        _WebOutputFileStream.Close();
-    }
-
 
     public override void PrintArtifacts(LinesResultView<LinesStorageMap> result_artifact)
     {
+        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
+        _WebOutputFileStream = new(outputFilePath);
+
         _WebOutputFileStream.WriteLine(GenerateWebPageBegin());
         PrintUncommentedContent(result_artifact.ContentFromSources);
         PrintUniqueContent(result_artifact.UniqueContentRepository);
         PrintCommonContent(result_artifact.CommonContentStorage);
         _WebOutputFileStream.WriteLine(GenerateWebPageEnd());
+
+        _WebOutputFileStream.Close();
     }
 
     public override void PrintArtifacts(LinesResultView<LinesStorageSet> result_artifact)
     {
+        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
+        _WebOutputFileStream = new(outputFilePath);
+
         _WebOutputFileStream.WriteLine(GenerateWebPageBegin());
         PrintUncommentedContent(result_artifact.ContentFromSources);
         PrintUniqueContent(result_artifact.UniqueContentRepository);
         PrintCommonContent(result_artifact.CommonContentStorage);
         _WebOutputFileStream.WriteLine(GenerateWebPageEnd());
+
+        _WebOutputFileStream.Close();
     }
 
 

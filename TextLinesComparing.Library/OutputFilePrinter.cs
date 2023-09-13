@@ -2,24 +2,43 @@ namespace TextLinesComparing.Library;
 
 public class OutputFilePrinter : OutputAbstractDevice
 {
+    private const string RESULT_FILE_EXTENSION = ".txt";
+    private readonly string _OutputDirectoryPath;
     private StreamWriter _OutputFileStream;
 
     public OutputFilePrinter()
     {
-        string outputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
-        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + ".result";
+        _OutputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
 
-        if (Directory.Exists(outputDirectoryPath) is false)
+        if (Directory.Exists(_OutputDirectoryPath) is false)
         {
-            Directory.CreateDirectory(outputDirectoryPath);
+            Directory.CreateDirectory(_OutputDirectoryPath);
         }
-
-        string outputFilePath = Path.Combine(outputDirectoryPath, outputFileName);
-        _OutputFileStream = new(outputFilePath);
     }
 
-    ~OutputFilePrinter()
+    public override void PrintArtifacts(LinesResultView<LinesStorageMap> result_artifact)
     {
+        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
+        _OutputFileStream = new(outputFilePath);
+
+        PrintUncommentedContent(result_artifact.ContentFromSources);
+        PrintUniqueContent(result_artifact.UniqueContentRepository);
+        PrintCommonContent(result_artifact.CommonContentStorage);
+
+        _OutputFileStream.Close();
+    }
+
+    public override void PrintArtifacts(LinesResultView<LinesStorageSet> result_artifact)
+    {
+        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
+        _OutputFileStream = new(outputFilePath);
+
+        PrintUncommentedContent(result_artifact.ContentFromSources);
+        PrintUniqueContent(result_artifact.UniqueContentRepository);
+        PrintCommonContent(result_artifact.CommonContentStorage);
+
         _OutputFileStream.Close();
     }
 
