@@ -44,8 +44,7 @@ public static class DatetimeUtilities
 {
     public static int GetCurrentYear(DateTime current_datetime)
     {
-        const int start_year = 1900; // 'tm_year' means years since 1900
-        return current_datetime.Year + start_year;
+        return current_datetime.Year;
     }
 
     public static int GetCurrentMonth(DateTime current_datetime)

@@ -4,13 +4,14 @@ namespace TextLinesComparing.Library;
 
 public class OutputWebPrinter : OutputAbstractDevice
 {
+    private const string RESULT_FOLDER_NAME = "~output";
     private const string RESULT_FILE_EXTENSION = ".html";
     private readonly string _OutputDirectoryPath;
     private StreamWriter _WebOutputFileStream;
 
     public OutputWebPrinter()
     {
-        _OutputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
+        _OutputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), RESULT_FOLDER_NAME);
 
         if (Directory.Exists(_OutputDirectoryPath) is false)
         {
