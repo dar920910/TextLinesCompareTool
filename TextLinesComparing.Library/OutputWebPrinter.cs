@@ -8,8 +8,16 @@ public class OutputWebPrinter : OutputAbstractDevice
 
     public OutputWebPrinter()
     {
+        string outputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
         string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + ".html";
-        _WebOutputFileStream = new(outputFileName);
+
+        if (Directory.Exists(outputDirectoryPath) is false)
+        {
+            Directory.CreateDirectory(outputDirectoryPath);
+        }
+
+        string outputFilePath = Path.Combine(outputDirectoryPath, outputFileName);
+        _WebOutputFileStream = new(outputFilePath);
     }
 
     ~OutputWebPrinter()

@@ -6,8 +6,16 @@ public class OutputFilePrinter : OutputAbstractDevice
 
     public OutputFilePrinter()
     {
+        string outputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "OutputResults");
         string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + ".result";
-        _OutputFileStream = new(outputFileName);
+
+        if (Directory.Exists(outputDirectoryPath) is false)
+        {
+            Directory.CreateDirectory(outputDirectoryPath);
+        }
+
+        string outputFilePath = Path.Combine(outputDirectoryPath, outputFileName);
+        _OutputFileStream = new(outputFilePath);
     }
 
     ~OutputFilePrinter()
