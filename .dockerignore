@@ -22,12 +22,3 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-README.md
-SendCodeLinesExplorer.code-workspace
-windows-docker-app-build.ps1
-windows-docker-app-run.ps1
-windows-mingw-app-build.ps1
-windows-mingw-app-run.ps1
-windows-mingw-app-test.ps1
-*.html
-*.result

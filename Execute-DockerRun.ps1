@@ -1,0 +1,1 @@
+docker run --interactive --tty --rm text_lines_comparing
