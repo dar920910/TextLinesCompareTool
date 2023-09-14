@@ -7,7 +7,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetYearFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(year: 100, month: 1, day: 1);
+        DateTime datetime = new(year: 2000, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2000));
@@ -16,7 +16,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetYearFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(year: 110, month: 1, day: 1);
+        DateTime datetime = new(year: 2010, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2010));
@@ -25,7 +25,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetYearFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(year: 122, month: 1, day: 1);
+        DateTime datetime = new(year: 2022, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2022));
