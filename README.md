@@ -2,7 +2,11 @@
 
 ## About the Project
 
-This is a project for experiments with parsing data from files.
+This project implements a tool for comparing content of several text files:
+
+- Finding common text content for several text files
+- Finding unique text content from evet text file
+- Smart parsing text files: trimming whitespaces, excluding string comments and etc.
 
 ## About the Repository Structure
 
