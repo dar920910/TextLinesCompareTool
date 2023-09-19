@@ -1,5 +1,6 @@
 @page "/uploadedcontent"
 @model UploadedContentModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div>
     <h1>RESULTS: @ViewData["Title"]</h1>
@@ -9,4 +10,9 @@
     }
 </div>
 <hr>
-<a class="btn btn-primary" href="/">Return to the Home Page</a>
+<div>
+    <form method="POST">
+        <input type="submit" class="btn btn-primary" value="Execute Analysis of Uploaded Files"/>
+    </form>
+    <a class="btn btn-primary" href="/">Return to the Home Page</a>
+</div>

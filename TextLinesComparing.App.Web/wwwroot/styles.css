@@ -1,0 +1,11 @@
+.all {
+    color: green; font-size: 125%;
+}
+
+.common {
+    color: red; font-size: 125%;
+}
+
+.unique {
+    color: blue; font-size: 125%;
+}

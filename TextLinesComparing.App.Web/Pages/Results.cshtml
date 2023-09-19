@@ -1,0 +1,50 @@
+@page "/results"
+@using TextLinesComparing.Library
+@model ResultsModel
+
+<div>
+    <h1>RESULTS: @ViewData["Title"]</h1>
+</div>
+<hr>
+<a class="btn btn-primary" href="/">Return to the Home Page</a>
+
+<div>
+    <h2>UNCOMMENTED LINES FROM ALL FILES</h2>
+    @foreach (LinesStorageMap @content_element in @Model.Artifacts.ContentFromSources.Content)
+    {
+        <h3>
+            @ResultsModel.GetSubDelimiter() UNCOMMENTED LINES: @content_element.Name @ResultsModel.GetSubDelimiter()
+        </h3>
+        <br>
+        @foreach (KeyValuePair<int, string> @uncommented_line in @content_element.Content)
+        {
+            <p class='all'>LINE: @ResultsModel.GetLineInfo(uncommented_line);</p>
+        }
+        <br>
+    }
+</div>
+<div>
+    <h3>@ResultsModel.GetDelimiter() COMMON LINES MAP @ResultsModel.GetDelimiter()</h3>
+    <br>
+    @foreach (KeyValuePair<int, string> @element in @Model.Artifacts.CommonContentStorage.Content)
+    {
+        <p class='common'>LINE: @ResultsModel.GetLineInfo(element);</p>
+    }
+    <br>
+</div>
+<div>
+    <br>
+    <h3>@ResultsModel.GetDelimiter() UNIQUE LINES MAPS (HASH + STRING) @ResultsModel.GetDelimiter()</h3>
+    <br>
+    @foreach (LinesStorageMap @content_element in @Model.Artifacts.UniqueContentRepository.Content)
+    {
+        <h4>@ResultsModel.GetSubDelimiter() UNIQUE LINES: @content_element.Name @ResultsModel.GetSubDelimiter()</h4>
+        <br>
+        foreach (KeyValuePair<int, string> @content_pair in @content_element.Content)
+        {
+            <p class='unique'>LINE: @ResultsModel.GetLineInfo(content_pair);</p>
+        }
+        <br>
+    }
+    <br>
+</div>
