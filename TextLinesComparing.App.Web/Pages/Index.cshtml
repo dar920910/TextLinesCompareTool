@@ -1,0 +1,52 @@
+@page
+@model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <h1>Welcome to the @ViewData["Title"]</h1>
+</div>
+<div>
+    <form asp-page-handler="UploadFiles" method="POST" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_1"/>
+            <label class="input-group-text">Upload a Local File # 1</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_2"/>
+            <label class="input-group-text">Upload a Local File # 2</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_3"/>
+            <label class="input-group-text">Upload a Local File # 3</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_4"/>
+            <label class="input-group-text">Upload a Local File # 4</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_5"/>
+            <label class="input-group-text">Upload a Local File # 5</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_6"/>
+            <label class="input-group-text">Upload a Local File # 6</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_7"/>
+            <label class="input-group-text">Upload a Local File # 7</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_8"/>
+            <label class="input-group-text">Upload a Local File # 8</label>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" asp-for="Upload_9"/>
+            <label class="input-group-text">Upload a Local File # 9</label>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Process Uploaded Files">
+            <a class="btn btn-primary" href="/uploadedcontent">Show Uploaded Files</a>
+        </div>
+    </form>
+</div>
+<script src="scripts.js"></script>

@@ -1,0 +1,12 @@
+@page "/uploadedcontent"
+@model UploadedContentModel
+
+<div>
+    <h1>RESULTS: @ViewData["Title"]</h1>
+    @foreach(string @uploadedFile in @Model.UploadedFiles)
+    {
+        <p>@uploadedFile</p>
+    }
+</div>
+<hr>
+<a class="btn btn-primary" href="/">Return to the Home Page</a>
