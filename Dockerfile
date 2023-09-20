@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-jammy
 WORKDIR /usr/local/src/TextLinesCompareTool
 
 COPY TextLinesComparing.Library/ TextLinesComparing.Library/
-COPY TextLinesComparing.Library/ TextLinesComparing.Testing/
+COPY TextLinesComparing.Testing/ TextLinesComparing.Testing/
 COPY TextLinesComparing.App.CLI/ TextLinesComparing.App.CLI/
 COPY TextLinesComparing.App.Web/ TextLinesComparing.App.Web/
 
