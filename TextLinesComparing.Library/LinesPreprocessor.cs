@@ -26,6 +26,33 @@ public class LinesPreprocessor
     }
 
     /// <summary>
+    /// Checks whether a character is not a comment symbol.
+    /// </summary>
+    /// <param name="character">A character to check.</param>
+    /// <returns>Returns 'true' if a character is whitespace symbol else 'false'.</returns>
+    public static bool IsNotCommentCharacter(char character)
+    {
+        const char comment_character = '#';
+
+        if (character == comment_character)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Checks whether a character is a whitespace symbol.
+    /// </summary>
+    /// <param name="character">A character to check.</param>
+    /// <returns>Returns 'true' if a character is whitespace symbol else 'false'.</returns>
+    public static bool IsSpaceCharacter(char character)
+    {
+        return char.IsWhiteSpace(character);
+    }
+
+    /// <summary>
     ///  Trims all redundant (start/wrapped/end) whitespace characters from an artifact string.
     /// </summary>
     /// <param name="artifactString">Source artifact string.</param>
@@ -37,14 +64,14 @@ public class LinesPreprocessor
         int currentIndex = 0;
         while (currentIndex < artifactString.Length)
         {
-            if (GeneralCharacterValidator.IsSpaceCharacter(artifactString[currentIndex]))
+            if (IsSpaceCharacter(artifactString[currentIndex]))
             {
                 int whitespacesBegIndex = currentIndex + 1;
                 int whitespacesEndIndex = whitespacesBegIndex;
 
                 while (whitespacesEndIndex < artifactString.Length)
                 {
-                    if (GeneralCharacterValidator.IsSpaceCharacter(artifactString[whitespacesEndIndex]))
+                    if (IsSpaceCharacter(artifactString[whitespacesEndIndex]))
                     {
                         targetWhitespaceIndexes.Add(whitespacesEndIndex);
                     }
@@ -108,7 +135,7 @@ public class LinesPreprocessor
         CharEnumerator enumerator = artifactString.GetEnumerator();
         while (enumerator.MoveNext())
         {
-            if (GeneralCharacterValidator.IsNotCommentCharacter(enumerator.Current))
+            if (IsNotCommentCharacter(enumerator.Current))
             {
                 trimmedSubstringLength++;
             }

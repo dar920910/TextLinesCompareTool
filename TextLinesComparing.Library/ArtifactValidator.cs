@@ -29,11 +29,11 @@ public static class ArtifactValidator
     {
         foreach (char character in targetString)
         {
-            if (GeneralCharacterValidator.IsSpaceCharacter(character))
+            if (LinesPreprocessor.IsSpaceCharacter(character))
             {
                 continue;
             }
-            else if (GeneralCharacterValidator.IsNotCommentCharacter(character))
+            else if (LinesPreprocessor.IsNotCommentCharacter(character))
             {
                 return true;
             }

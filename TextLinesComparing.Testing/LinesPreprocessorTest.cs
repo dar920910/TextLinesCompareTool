@@ -330,4 +330,72 @@ public class LinesPreprocessorTest
                 expression: Is.EqualTo("   qwerty   0123456789   qwerty"));
         });
     }
+
+    [Test]
+    public void IsCommentCharacter()
+    {
+        const char comment_character = '#';
+        const char test_character = comment_character;
+
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+    }
+
+    [Test]
+    public void IsNotCommentCharacter_TestCase()
+    {
+        char comment_character = '#';
+        char test_character = default;
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = 'Z';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = 'b';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = 'y';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = '1';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = '9';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = '@';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+
+        comment_character = '#';
+        test_character = '&';
+        Assert.That(LinesPreprocessor.IsNotCommentCharacter(test_character), Is.EqualTo(test_character != comment_character));
+    }
+
+    [Test]
+    public void IsSpaceCharacter_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsSpaceCharacter(' '), Is.True); // ASCII: 0x20
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\f'), Is.True); // ASCII: 0x0C
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\n'), Is.True); // ASCII: 0x0A
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\r'), Is.True); // ASCII: 0x0D
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\t'), Is.True); // ASCII: 0x09
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\v'), Is.True); // ASCII: 0x0B
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('A'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('Z'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('b'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('y'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('0'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('9'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('#'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('/'), Is.False);
+            Assert.That(LinesPreprocessor.IsSpaceCharacter('\\'), Is.False);
+        });
+    }
 }
