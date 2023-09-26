@@ -1,13 +1,22 @@
-using TextLinesComparing.Library;
+//-----------------------------------------------------------------------
+// <copyright file="DatetimeUtilitiesTest.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace TextLinesComparing.Testing;
 
-public class AppDatetimeServiceTest
+using TextLinesComparing.Library;
+
+/// <summary>
+/// Contains unit tests for the <see cref="DatetimeUtilities"> class.
+/// </summary>
+public class DatetimeUtilitiesTest
 {
     [Test]
     public void GetYearFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(year: 2000, month: 1, day: 1);
+        DateTime datetime = new (year: 2000, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2000));
@@ -16,7 +25,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetYearFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(year: 2010, month: 1, day: 1);
+        DateTime datetime = new (year: 2010, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2010));
@@ -25,17 +34,16 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetYearFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(year: 2022, month: 1, day: 1);
+        DateTime datetime = new (year: 2022, month: 1, day: 1);
         int actual_year = DatetimeUtilities.GetCurrentYear(datetime);
 
         Assert.That(actual_year, Is.EqualTo(2022));
     }
 
-
     [Test]
     public void GetMonthFromDatetimeWhenJanuary()
     {
-        DateTime datetime = new(year: 2023, month: 1, day: 1);
+        DateTime datetime = new (year: 2023, month: 1, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(1));
@@ -44,7 +52,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenFebruary()
     {
-        DateTime datetime = new(year: 2023, month: 2, day: 1);
+        DateTime datetime = new (year: 2023, month: 2, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(2));
@@ -53,7 +61,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenMarch()
     {
-        DateTime datetime = new(year: 2023, month: 3, day: 1);
+        DateTime datetime = new (year: 2023, month: 3, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(3));
@@ -62,7 +70,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenApril()
     {
-        DateTime datetime = new(year: 2023, month: 4, day: 1);
+        DateTime datetime = new (year: 2023, month: 4, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(4));
@@ -71,7 +79,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenMay()
     {
-        DateTime datetime = new(year: 2023, month: 5, day: 1);
+        DateTime datetime = new (year: 2023, month: 5, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(5));
@@ -80,7 +88,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenJune()
     {
-        DateTime datetime = new(year: 2023, month: 6, day: 1);
+        DateTime datetime = new (year: 2023, month: 6, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(6));
@@ -89,7 +97,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenJuly()
     {
-        DateTime datetime = new(year: 2023, month: 7, day: 1);
+        DateTime datetime = new (year: 2023, month: 7, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(7));
@@ -98,7 +106,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenAugust()
     {
-        DateTime datetime = new(year: 2023, month: 8, day: 1);
+        DateTime datetime = new (year: 2023, month: 8, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(8));
@@ -107,7 +115,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenSeptember()
     {
-        DateTime datetime = new(year: 2023, month: 9, day: 1);
+        DateTime datetime = new (year: 2023, month: 9, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(9));
@@ -116,7 +124,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenOctober()
     {
-        DateTime datetime = new(year: 2023, month: 10, day: 1);
+        DateTime datetime = new (year: 2023, month: 10, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(10));
@@ -125,7 +133,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenNovember()
     {
-        DateTime datetime = new(year: 2023, month: 11, day: 1);
+        DateTime datetime = new (year: 2023, month: 11, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(11));
@@ -134,17 +142,16 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMonthFromDatetimeWhenDecember()
     {
-        DateTime datetime = new(year: 2023, month: 12, day: 1);
+        DateTime datetime = new (year: 2023, month: 12, day: 1);
         int actual_month = DatetimeUtilities.GetCurrentMonth(datetime);
 
         Assert.That(actual_month, Is.EqualTo(12));
     }
 
-
     [Test]
     public void GetDayFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(year: 2023, month: 1, day: 1);
+        DateTime datetime = new (year: 2023, month: 1, day: 1);
 
         int actual_day = DatetimeUtilities.GetCurrentDay(datetime);
         const int expected_day = 1;
@@ -155,7 +162,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetDayFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(year: 2023, month: 1, day: 10);
+        DateTime datetime = new (year: 2023, month: 1, day: 10);
 
         int actual_day = DatetimeUtilities.GetCurrentDay(datetime);
         const int expected_day = 10;
@@ -166,7 +173,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetDayFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(year: 2023, month: 1, day: 20);
+        DateTime datetime = new (year: 2023, month: 1, day: 20);
 
         int actual_day = DatetimeUtilities.GetCurrentDay(datetime);
         const int expected_day = 20;
@@ -174,11 +181,10 @@ public class AppDatetimeServiceTest
         Assert.That(actual_day, Is.EqualTo(expected_day));
     }
 
-
     [Test]
     public void GetHourFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 0, minute: 0, second: 0);
 
@@ -191,7 +197,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetHourFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 0, second: 0);
 
@@ -204,7 +210,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetHourFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 23, minute: 0, second: 0);
 
@@ -214,11 +220,10 @@ public class AppDatetimeServiceTest
         Assert.That(actual_hour, Is.EqualTo(expected_hour));
     }
 
-
     [Test]
     public void GetMinuteFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 0, second: 0);
 
@@ -231,7 +236,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMinuteFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 30, second: 0);
 
@@ -244,7 +249,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetMinuteFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 59, second: 0);
 
@@ -254,11 +259,10 @@ public class AppDatetimeServiceTest
         Assert.That(actual_minute, Is.EqualTo(expected_minute));
     }
 
-
     [Test]
     public void GetSecondFromDatetime_TestCase_1()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 0, second: 0);
 
@@ -271,7 +275,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetSecondFromDatetime_TestCase_2()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 0, second: 30);
 
@@ -284,7 +288,7 @@ public class AppDatetimeServiceTest
     [Test]
     public void GetSecondFromDatetime_TestCase_3()
     {
-        DateTime datetime = new(
+        DateTime datetime = new (
             year: 2023, month: 1, day: 1,
             hour: 12, minute: 0, second: 59);
 
@@ -293,7 +297,6 @@ public class AppDatetimeServiceTest
 
         Assert.That(actual_second, Is.EqualTo(expected_second));
     }
-
 
     [Test]
     public void GetDateAsText_TestCase_1()
@@ -321,7 +324,6 @@ public class AppDatetimeServiceTest
         Assert.That(actual_date, Is.EqualTo(expected_date));
     }
 
-
     [Test]
     public void GetTimeAsText_TestCase_1()
     {
@@ -347,7 +349,6 @@ public class AppDatetimeServiceTest
 
         Assert.That(actual_time, Is.EqualTo(expected_time));
     }
-
 
     [Test]
     public void GetDatetimeUnitWithZero_TestCase_0()

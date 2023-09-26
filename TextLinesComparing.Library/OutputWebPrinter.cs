@@ -21,7 +21,7 @@ public class OutputWebPrinter : OutputAbstractDevice
 
     public override void PrintArtifacts(LinesResultView<LinesStorageMap> result_artifact)
     {
-        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
         string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
         _WebOutputFileStream = new(outputFilePath);
 
@@ -36,7 +36,7 @@ public class OutputWebPrinter : OutputAbstractDevice
 
     public override void PrintArtifacts(LinesResultView<LinesStorageSet> result_artifact)
     {
-        string outputFileName = new AppDatetimeService().GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
+        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
         string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
         _WebOutputFileStream = new(outputFilePath);
 

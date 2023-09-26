@@ -1,9 +1,11 @@
-﻿using TextLinesComparing.Library;
+﻿using System.Diagnostics;
+using TextLinesComparing.Library;
 
-AppDatetimeService datetime = new();
+Stopwatch stopwatch = new ();
+stopwatch.Start();
 
 List<string> arguments = AppLaunchConfiguration.GetArgumentsOfSources(args);
-SourcesExplorer explorer = new(arguments);
+SourcesExplorer explorer = new (arguments);
 
 const int CriticalPerformanceThreshold = 2;
 if (arguments.Count > CriticalPerformanceThreshold)
@@ -23,4 +25,5 @@ else
     new OutputWebPrinter().PrintArtifacts(artifacts);
 }
 
-datetime.PrintExecutionElapsedTimeMessage();
+stopwatch.Stop();
+Console.WriteLine($"[INFO] Program's Execution Time: {stopwatch.Elapsed}\n");
