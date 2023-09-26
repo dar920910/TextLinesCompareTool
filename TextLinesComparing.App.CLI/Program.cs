@@ -1,14 +1,25 @@
-﻿using System.Diagnostics;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System.Diagnostics;
 using TextLinesComparing.Library;
 
 Stopwatch stopwatch = new ();
 stopwatch.Start();
 
-List<string> arguments = AppLaunchConfiguration.GetArgumentsOfSources(args);
-SourcesExplorer explorer = new (arguments);
+List<string> sources = new ();
+for (int source_index = 1; source_index < args.Length; source_index++)
+{
+    sources.Add(args[source_index]);
+}
+
+SourcesExplorer explorer = new (sources);
 
 const int CriticalPerformanceThreshold = 2;
-if (arguments.Count > CriticalPerformanceThreshold)
+if (sources.Count > CriticalPerformanceThreshold)
 {
     LinesResultView<LinesStorageMap> artifacts =
         explorer.GetArtifactsFromSourcesAsMapBasedContent();
