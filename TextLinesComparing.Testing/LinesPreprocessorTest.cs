@@ -25,7 +25,6 @@ public class LinesPreprocessorTest
         Assert.That(preprocessor.RetrievePreprocessedArtifact(), Is.EqualTo("/FFF/"));
     }
 
-
     [Test]
     public void RetrieveArtifactFromLineWithEndSpaces_TestCase_1()
     {
@@ -46,7 +45,6 @@ public class LinesPreprocessorTest
         LinesPreprocessor preprocessor = new("/FFF/             ");
         Assert.That(preprocessor.RetrievePreprocessedArtifact(), Is.EqualTo("/FFF/"));
     }
-
 
     [Test]
     public void RetrieveArtifactFromLineWrappedBySpaces_TestCase_1()
@@ -69,7 +67,6 @@ public class LinesPreprocessorTest
         Assert.That(preprocessor.RetrievePreprocessedArtifact(), Is.EqualTo("/FFF/"));
     }
 
-
     [Test]
     public void RetrieveArtifactFromLineWithComment_TestCase_1()
     {
@@ -83,7 +80,6 @@ public class LinesPreprocessorTest
         LinesPreprocessor preprocessor = new("\\aa\\bb\\cc# Windows style");
         Assert.That(preprocessor.RetrievePreprocessedArtifact(), Is.EqualTo("\\aa\\bb\\cc"));
     }
-
 
     [Test]
     public void RetrieveArtifactFromLineWithSpacesAndComment_TestCase_1()
@@ -396,6 +392,181 @@ public class LinesPreprocessorTest
             Assert.That(LinesPreprocessor.IsSpaceCharacter('#'), Is.False);
             Assert.That(LinesPreprocessor.IsSpaceCharacter('/'), Is.False);
             Assert.That(LinesPreprocessor.IsSpaceCharacter('\\'), Is.False);
+        });
+    }
+
+    [Test]
+    public void IsArtifact_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("/a/b/c/d/"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("   b/c   "), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("/a/ # /d/"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsNotArtifact_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact(""), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact(string.Empty), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("         "), Is.False);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyLetters_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("abcdefghijklmnopqrstuvwxyz"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("ABCDEFGHIJKLMnopqrstuvwxyz"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("abcdefghijklmNOPQRSTUVWXYZ"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyDigits_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("0123456789"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("9876543210"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyPunctuationSigns_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("....."), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(",,,,,,"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("!!!!!"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("?????"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(":::::"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(";;;;;"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("((((("), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(")))))"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("-----"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("'''''"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("\"\"\"\"\""), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyArithmeticSigns_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("+++++"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("-----"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("*****"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("/////"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("======"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlySpecialSymbols_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("~~~~~"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("`````"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("@@@@@"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("$$$$$"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("%%%%%"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("&&&&&"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("_____"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("^^^^^"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("<<<<<"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(">>>>>"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("[[[[["), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("]]]]]"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("|||||"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("\\\\\\\\\\"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("{{{{{"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("}}}}}"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyPathLikeUnixStyle_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("/AAA/"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("/BBB/CCC/"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("/CCC/DDD/EEE/"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsOnlyPathLikeWindowsStyle_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("\\AAA\\"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("\\BBB\\CCC\\"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("\\CCC\\DDD\\EEE\\"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsSpacesBeforeText_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("          \\AAA\\BBB\\CCC\\"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("     /ddd/eee/fff/"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact(" /g\\h/i\\j"), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsArtifactWhenLineContainsCommentsAfterText_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("\\AAA\\BBB\\CCC\\ # Windows style"), Is.True);
+            Assert.That(LinesPreprocessor.IsArtifact("/ddd/eee/fff/     # Unix style   "), Is.True);
+        });
+    }
+
+    [Test]
+    public void IsNotArtifactWhenLineContainsOnlyComments_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("##########"), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("#####"), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("#"), Is.False);
+        });
+    }
+
+    [Test]
+    public void IsNotArtifactWhenLineContainsCommentsBeforeText_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact("#/AAA/BBB/CCC/"), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("#    /DDD/EEE/"), Is.False);
+        });
+    }
+
+    [Test]
+    public void IsNotArtifactWhenLineContainsSpacesBeforeComment_TestCase()
+    {
+        Assert.Multiple(() =>
+        {
+            Assert.That(LinesPreprocessor.IsArtifact(" #/AAA/BBB/CCC/"), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("  #/DDD/EEE/"), Is.False);
+            Assert.That(LinesPreprocessor.IsArtifact("   #/FFF/GGG/"), Is.False);
         });
     }
 }

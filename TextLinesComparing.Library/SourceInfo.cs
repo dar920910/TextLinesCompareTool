@@ -20,7 +20,7 @@ public class SourceInfo
 
         foreach (string stringFromSource in _Content)
         {
-            if (ArtifactValidator.IsArtifact(stringFromSource))
+            if (LinesPreprocessor.IsArtifact(stringFromSource))
             {
                 string artifact_string = new LinesPreprocessor(stringFromSource)
                     .RetrievePreprocessedArtifact();
@@ -40,7 +40,7 @@ public class SourceInfo
 
         foreach (string stringFromSource in _Content)
         {
-            if (ArtifactValidator.IsArtifact(stringFromSource))
+            if (LinesPreprocessor.IsArtifact(stringFromSource))
             {
                 string artifact_string = new LinesPreprocessor(stringFromSource).RetrievePreprocessedArtifact();
                 target_content.PutContent(new LineInfo(artifact_string));

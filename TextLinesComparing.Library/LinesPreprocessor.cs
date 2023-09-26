@@ -26,6 +26,24 @@ public class LinesPreprocessor
     }
 
     /// <summary>
+    /// Checks whether a target string is an artifact string.
+    /// </summary>
+    /// <param name="targetString">Source string to check.</param>
+    /// <returns>Returns 'true' a target string is an artifact string else 'false'.</returns>
+    public static bool IsArtifact(string targetString)
+    {
+        if (IsLine(targetString))
+        {
+            if (StartsWithPermissibleCharacter(targetString))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Checks whether a character is not a comment symbol.
     /// </summary>
     /// <param name="character">A character to check.</param>
@@ -228,6 +246,37 @@ public class LinesPreprocessor
         artifact = TrimEndWhitespaces(artifact);
 
         return artifact;
+    }
+
+    private static bool IsLine(string targetString)
+    {
+        if (string.IsNullOrEmpty(targetString))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool StartsWithPermissibleCharacter(string targetString)
+    {
+        foreach (char character in targetString)
+        {
+            if (IsSpaceCharacter(character))
+            {
+                continue;
+            }
+            else if (IsNotCommentCharacter(character))
+            {
+                return true;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return false;
     }
 
     private static bool IsCommentSlash(char artifactCharacter)
