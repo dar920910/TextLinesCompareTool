@@ -9,7 +9,7 @@ namespace TextLinesComparing.Library;
 /// <summary>
 /// Represents information about a string from a source text file.
 /// </summary>
-public class LineInfo
+public record LineInfo
 {
     private readonly string currentLineString;
     private readonly int currentLineHash;
@@ -21,7 +21,7 @@ public class LineInfo
     public LineInfo(string target)
     {
         this.currentLineString = target;
-        this.currentLineHash = target.GetHashCode();
+        this.currentLineHash = GenerateLineHash(target);
     }
 
     /// <summary>
