@@ -1,25 +1,28 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+//-----------------------------------------------------------------------
+// <copyright file="Index.cshtml.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1649 // FileNameMustMatchTypeName
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-
 
 public class IndexModel : PageModel
 {
-    private IWebHostEnvironment _Environment;
-    private readonly string _UploadsFolderName;
+    private readonly IWebHostEnvironment currentEnvironment;
+    private readonly string uploadsFolderName;
 
     public IndexModel(IWebHostEnvironment environment)
     {
-        _Environment = environment;
+        this.currentEnvironment = environment;
 
-        _UploadsFolderName = Path.Combine(_Environment.WebRootPath, "uploads");
-        if (Directory.Exists(_UploadsFolderName) is false)
+        this.uploadsFolderName = Path.Combine(this.currentEnvironment.WebRootPath, "uploads");
+        if (Directory.Exists(this.uploadsFolderName) is false)
         {
-            Directory.CreateDirectory(_UploadsFolderName);
+            Directory.CreateDirectory(this.uploadsFolderName);
         }
     }
 
@@ -50,25 +53,35 @@ public class IndexModel : PageModel
     [BindProperty]
     public IFormFile? Upload_9 { get; set; }
 
-
     public void OnGet()
     {
-        ViewData["Title"] = "TextLinesCompareTool (Select Files to Upload)";
+        this.ViewData["Title"] = "TextLinesCompareTool (Select Files to Upload)";
     }
 
     public async Task OnPostUploadFilesAsync()
     {
-        IFormFile[] uploads = { Upload_1!, Upload_2!, Upload_3!, Upload_4!, Upload_5!, Upload_6!, Upload_7!, Upload_8!, Upload_9! };
+        IFormFile[] uploads =
+        {
+            this.Upload_1!,
+            this.Upload_2!,
+            this.Upload_3!,
+            this.Upload_4!,
+            this.Upload_5!,
+            this.Upload_6!,
+            this.Upload_7!,
+            this.Upload_8!,
+            this.Upload_9!,
+        };
 
-        List<string> uploadedFilePaths = new();
+        List<string> uploadedFilePaths = new ();
 
         foreach (IFormFile upload in uploads)
         {
             if (upload is not null)
             {
-                string uploadFilePath = Path.Combine(_UploadsFolderName, upload.FileName);
+                string uploadFilePath = Path.Combine(this.uploadsFolderName, upload.FileName);
 
-                using (FileStream fileStream = new(uploadFilePath, FileMode.Create))
+                using (FileStream fileStream = new (uploadFilePath, FileMode.Create))
                 {
                     await upload.CopyToAsync(fileStream);
                 }

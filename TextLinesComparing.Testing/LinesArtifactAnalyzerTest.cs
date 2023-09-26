@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+
 namespace TextLinesComparing.Testing;
 
 using TextLinesComparing.Library;
@@ -99,7 +101,6 @@ public class LinesArtifactAnalyzerTest
         Assert.That(actual_common_map.Content, Is.EqualTo(expected_common_map.Content));
     }
 
-
     [Test]
     public void ExtractCommonLinesFromSetBasedSources_TestCase_1()
     {
@@ -108,7 +109,7 @@ public class LinesArtifactAnalyzerTest
 
         LinesStorageSet common_storage = LinesArtifactAnalyzer.ExtractCommonContent(source_1, source_2);
 
-        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() {"/aaa/eee/", "/test/", "/test1/", "/test2/", "sss/ggg"}));
+        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() { "/aaa/eee/", "/test/", "/test1/", "/test2/", "sss/ggg" }));
     }
 
     [Test]
@@ -119,7 +120,7 @@ public class LinesArtifactAnalyzerTest
 
         LinesStorageSet common_storage = LinesArtifactAnalyzer.ExtractCommonContent(source_2, source_3);
 
-        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() {"/test/", "/test1/", "/test2/", "sss/ggg", "vvvv/pppp"}));
+        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() { "/test/", "/test1/", "/test2/", "sss/ggg", "vvvv/pppp" }));
     }
 
     [Test]
@@ -130,9 +131,8 @@ public class LinesArtifactAnalyzerTest
 
         LinesStorageSet common_storage = LinesArtifactAnalyzer.ExtractCommonContent(source_3, source_4);
 
-        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() {"/test/", "/test1/", "/test2/"}));
+        Assert.That(common_storage.Content, Is.EqualTo(new SortedSet<string>() { "/test/", "/test1/", "/test2/" }));
     }
-
 
     [Test]
     public void ExtractUniqueLinesFromSource_TestCase_1()
@@ -256,7 +256,6 @@ public class LinesArtifactAnalyzerTest
         Assert.That(LinesArtifactAnalyzer.RetrievePreprocessedArtifact("  \\aa\\bb\\cc   # Windows style  "), Is.EqualTo("\\aa\\bb\\cc"));
     }
 
-
     [Test]
     public void RetrieveArtifactFromLineWithCommentInsideText_TestCase_1()
     {
@@ -323,7 +322,7 @@ public class LinesArtifactAnalyzerTest
             Assert.That(
                 actual: LinesArtifactAnalyzer.TrimSingleStringComment(
                     artifactString: "# This is a comment string!"),
-                expression: Is.EqualTo(""));
+                expression: Is.EqualTo(string.Empty));
         });
     }
 
@@ -570,7 +569,6 @@ public class LinesArtifactAnalyzerTest
     {
         Assert.Multiple(() =>
         {
-            Assert.That(LinesArtifactAnalyzer.IsArtifact(""), Is.False);
             Assert.That(LinesArtifactAnalyzer.IsArtifact(string.Empty), Is.False);
             Assert.That(LinesArtifactAnalyzer.IsArtifact("         "), Is.False);
         });

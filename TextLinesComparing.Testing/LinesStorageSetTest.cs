@@ -1,6 +1,14 @@
-using TextLinesComparing.Library;
+//-----------------------------------------------------------------------
+// <copyright file="LinesStorageSetTest.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
 
 namespace TextLinesComparing.Testing;
+
+using TextLinesComparing.Library;
 
 public class LinesStorageSetTest
 {
@@ -17,7 +25,7 @@ public class LinesStorageSetTest
     [Test]
     public void PutContent_TestCase()
     {
-        LinesStorageSet set = new(new string[] { "A", "B", "C" });
+        LinesStorageSet set = new (new string[] { "A", "B", "C" });
 
         set.PutContent(new LineInfo("D"));
         set.PutContent(new LineInfo("E"));

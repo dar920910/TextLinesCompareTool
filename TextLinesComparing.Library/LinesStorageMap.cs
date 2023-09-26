@@ -1,32 +1,42 @@
+//-----------------------------------------------------------------------
+// <copyright file="LinesStorageMap.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+
 namespace TextLinesComparing.Library;
 
 public class LinesStorageMap
 {
-    public string Name { get; set; }
-    private Dictionary<int, string> _LinesMap;
+    private readonly Dictionary<int, string> currentLinesMap;
 
     public LinesStorageMap()
     {
-        _LinesMap = new Dictionary<int, string>();
-        Name = "Lines Storage Map";
+        this.currentLinesMap = new Dictionary<int, string>();
+        this.Name = "Lines Storage Map";
     }
 
     public LinesStorageMap(LineInfo info, string name = "Lines Storage Map")
     {
-        _LinesMap = new Dictionary<int, string>()
+        this.currentLinesMap = new Dictionary<int, string>()
         {
-            { info.Content.Key, info.Content.Value }
+            { info.Content.Key, info.Content.Value },
         };
-        Name = name;
+
+        this.Name = name;
+    }
+
+    public string Name { get; set; }
+
+    public Dictionary<int, string> Content
+    {
+        get { return this.currentLinesMap; }
     }
 
     public void PutContent(LineInfo target_info)
     {
-        _LinesMap.Add(target_info.Content.Key, target_info.Content.Value);
+        this.currentLinesMap.Add(target_info.Content.Key, target_info.Content.Value);
     }
-
-    public Dictionary<int, string> Content
-    {
-        get { return _LinesMap; }
-    }
-};
+}

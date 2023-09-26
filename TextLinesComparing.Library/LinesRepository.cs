@@ -1,21 +1,29 @@
+//-----------------------------------------------------------------------
+// <copyright file="LinesRepository.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+
 namespace TextLinesComparing.Library;
 
-public class LinesRepository<LinesStorageContainer>
+public class LinesRepository<TLinesStorageContainer>
 {
-    private List<LinesStorageContainer> _UniqueLines;
+    private readonly List<TLinesStorageContainer> reposUniqueLines;
 
     public LinesRepository()
     {
-        _UniqueLines = new List<LinesStorageContainer>();
+        this.reposUniqueLines = new List<TLinesStorageContainer>();
     }
 
-    public void PutContent(LinesStorageContainer unique_info)
+    public List<TLinesStorageContainer> Content
     {
-        _UniqueLines.Add(unique_info);
+        get { return this.reposUniqueLines; }
     }
 
-    public List<LinesStorageContainer> Content
+    public void PutContent(TLinesStorageContainer unique_info)
     {
-        get { return _UniqueLines; }
+        this.reposUniqueLines.Add(unique_info);
     }
 }

@@ -1,28 +1,38 @@
+//-----------------------------------------------------------------------
+// <copyright file="UploadedContent.cshtml.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1649 // FileNameMustMatchTypeName
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class UploadedContentModel : PageModel
 {
-    public readonly List<string> UploadedFiles;
     public UploadedContentModel()
     {
-        UploadedFiles = UploadsStore.UploadedFilePaths;
+        this.UploadedFiles = UploadsStore.UploadedFilePaths;
     }
+
+    public List<string> UploadedFiles { get; }
 
     public void OnGet()
     {
-        ViewData["Title"] = "TextLinesCompareTool (Uploaded Files)";
+        this.ViewData["Title"] = "TextLinesCompareTool (Uploaded Files)";
     }
 
-    public IActionResult OnPost() // CompareUploadedFiles
+    public IActionResult OnPost()
     {
-        if (ModelState.IsValid)
+        if (this.ModelState.IsValid)
         {
-            return RedirectToPage("/results");
+            return this.RedirectToPage("/results");
         }
         else
         {
-            return Page();
+            return this.Page();
         }
     }
 }

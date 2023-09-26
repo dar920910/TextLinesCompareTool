@@ -4,12 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+
 namespace TextLinesComparing.Testing;
 
 using TextLinesComparing.Library;
 
 /// <summary>
-/// Contains unit tests for the <see cref="DatetimeUtilities"> class.
+/// Contains unit tests for the DatetimeUtilities class.
 /// </summary>
 public class DatetimeUtilitiesTest
 {
@@ -316,7 +318,7 @@ public class DatetimeUtilitiesTest
     {
         const int year = 2022;
         const int month = 1;
-        const int day  = 1;
+        const int day = 1;
 
         string actual_date = DatetimeUtilities.GetCurrentDateText(year, month, day);
         const string expected_date = "2022-01-01";

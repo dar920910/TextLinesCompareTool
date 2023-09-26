@@ -1,208 +1,229 @@
+//-----------------------------------------------------------------------
+// <copyright file="OutputFilePrinter.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+
 namespace TextLinesComparing.Library;
 
 public class OutputFilePrinter : OutputAbstractDevice
 {
-    private const string RESULT_FOLDER_NAME = "~output";
-    private const string RESULT_FILE_EXTENSION = ".txt";
-    private readonly string _OutputDirectoryPath;
-    private StreamWriter _OutputFileStream;
+    private const string ResultFolderName = "~output";
+    private const string ResultFileExtension = ".txt";
+
+    private readonly string outputDirectoryPath;
+    private StreamWriter outputFileStream;
 
     public OutputFilePrinter()
     {
-        _OutputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), RESULT_FOLDER_NAME);
+        this.outputDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), ResultFolderName);
 
-        if (Directory.Exists(_OutputDirectoryPath) is false)
+        if (Directory.Exists(this.outputDirectoryPath) is false)
         {
-            Directory.CreateDirectory(_OutputDirectoryPath);
+            Directory.CreateDirectory(this.outputDirectoryPath);
         }
     }
 
     public override void PrintArtifacts(LinesResultView<LinesStorageMap> result_artifact)
     {
-        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
-        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
-        _OutputFileStream = new(outputFilePath);
+        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + ResultFileExtension;
+        string outputFilePath = Path.Combine(this.outputDirectoryPath, outputFileName);
+        this.outputFileStream = new (outputFilePath);
 
-        PrintUncommentedContent(result_artifact.ContentFromSources);
-        PrintUniqueContent(result_artifact.UniqueContentRepository);
-        PrintCommonContent(result_artifact.CommonContentStorage);
+        this.PrintUncommentedContent(result_artifact.ContentFromSources);
+        this.PrintUniqueContent(result_artifact.UniqueContentRepository);
+        this.PrintCommonContent(result_artifact.CommonContentStorage);
 
-        _OutputFileStream.Close();
+        this.outputFileStream.Close();
     }
 
     public override void PrintArtifacts(LinesResultView<LinesStorageSet> result_artifact)
     {
-        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + RESULT_FILE_EXTENSION;
-        string outputFilePath = Path.Combine(_OutputDirectoryPath, outputFileName);
-        _OutputFileStream = new(outputFilePath);
+        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + ResultFileExtension;
+        string outputFilePath = Path.Combine(this.outputDirectoryPath, outputFileName);
+        this.outputFileStream = new (outputFilePath);
 
-        PrintUncommentedContent(result_artifact.ContentFromSources);
-        PrintUniqueContent(result_artifact.UniqueContentRepository);
-        PrintCommonContent(result_artifact.CommonContentStorage);
+        this.PrintUncommentedContent(result_artifact.ContentFromSources);
+        this.PrintUniqueContent(result_artifact.UniqueContentRepository);
+        this.PrintCommonContent(result_artifact.CommonContentStorage);
 
-        _OutputFileStream.Close();
+        this.outputFileStream.Close();
     }
-
 
     protected override void PrintUncommentedContent(LinesRepository<LinesStorageMap> content_repos)
     {
-        PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
+        this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
         List<LinesStorageMap> content_collection = content_repos.Content;
+
         foreach (var content_element in content_collection)
         {
-            PrintUncommentedContent(content_element);
+            this.PrintUncommentedContent(content_element);
         }
     }
 
     protected override void PrintUncommentedContent(LinesRepository<LinesStorageSet> content_repos)
     {
-        PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
+        this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
         List<LinesStorageSet> content_collection = content_repos.Content;
+
         foreach (var content_element in content_collection)
         {
-            PrintUncommentedContent(content_element);
+            this.PrintUncommentedContent(content_element);
         }
     }
 
     protected override void PrintUncommentedContent(LinesStorageMap target_content)
     {
-        PrintUncommentedContentTitle(target_content.Name);
+        this.PrintUncommentedContentTitle(target_content.Name);
         Dictionary<int, string> uncommented_lines = target_content.Content;
+
         foreach (KeyValuePair<int, string> uncommented_line in uncommented_lines)
         {
-            PrintLineInfo(uncommented_line);
+            this.PrintLineInfo(uncommented_line);
         }
-        _OutputFileStream.WriteLine();
+
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintUncommentedContent(LinesStorageSet target_content)
     {
-        PrintUncommentedContentTitle(target_content.Name);
+        this.PrintUncommentedContentTitle(target_content.Name);
         SortedSet<string> uncommented_lines = target_content.Content;
+
         foreach (string uncommented_line in uncommented_lines)
         {
-            PrintLineInfo(uncommented_line);
+            this.PrintLineInfo(uncommented_line);
         }
-        _OutputFileStream.WriteLine();
-    }
 
+        this.outputFileStream.WriteLine();
+    }
 
     protected override void PrintUniqueContent(LinesRepository<LinesStorageMap> repos)
     {
-        PrintContentTitle("UNIQUE LINES MAPS (HASH + STRING)");
+        this.PrintContentTitle("UNIQUE LINES MAPS (HASH + STRING)");
+
         foreach (LinesStorageMap content_element in repos.Content)
         {
-            PrintUniqueContent(content_element);
+            this.PrintUniqueContent(content_element);
         }
-        _OutputFileStream.WriteLine();
+
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintUniqueContent(LinesRepository<LinesStorageSet> repos)
     {
-        PrintContentTitle("UNIQUE LINES (SETS OF STRINGS)");
+        this.PrintContentTitle("UNIQUE LINES (SETS OF STRINGS)");
+
         foreach (LinesStorageSet unique_object in repos.Content)
         {
-            PrintUniqueContent(unique_object);
+            this.PrintUniqueContent(unique_object);
         }
-        _OutputFileStream.WriteLine();
+
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintUniqueContent(LinesStorageMap content_element)
     {
-        PrintUniqueContentTitle(content_element.Name);
+        this.PrintUniqueContentTitle(content_element.Name);
         Dictionary<int, string> content_element_map = content_element.Content;
+
         foreach (KeyValuePair<int, string> content_pair in content_element_map)
         {
-            PrintLineInfo(content_pair);
+            this.PrintLineInfo(content_pair);
         }
-        _OutputFileStream.WriteLine();
+
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintUniqueContent(LinesStorageSet content_element)
     {
-        PrintUniqueContentTitle(content_element.Name);
+        this.PrintUniqueContentTitle(content_element.Name);
         SortedSet<string> content_element_set = content_element.Content;
+
         foreach (string content_unit in content_element_set)
         {
-            PrintLineInfo(content_unit);
+            this.PrintLineInfo(content_unit);
         }
-        _OutputFileStream.WriteLine();
-    }
 
+        this.outputFileStream.WriteLine();
+    }
 
     protected override void PrintCommonContent(LinesStorageMap target_content)
     {
-        PrintContentTitle("COMMON LINES MAP");
+        this.PrintContentTitle("COMMON LINES MAP");
         Dictionary<int, string> target_content_map = target_content.Content;
+
         foreach (KeyValuePair<int, string> element in target_content_map)
         {
-            PrintLineInfo(element);
+            this.PrintLineInfo(element);
         }
-        _OutputFileStream.WriteLine();
+
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintCommonContent(LinesStorageSet target_content)
     {
-        PrintContentTitle("COMMON LINES SET");
+        this.PrintContentTitle("COMMON LINES SET");
         SortedSet<string> target_content_set = target_content.Content;
+
         foreach (string common_line in target_content_set)
         {
-            PrintLineInfo(common_line);
+            this.PrintLineInfo(common_line);
         }
-        _OutputFileStream.WriteLine();
-    }
 
+        this.outputFileStream.WriteLine();
+    }
 
     protected override void PrintContentTitle(string title_text)
     {
-        _OutputFileStream.WriteLine(
+        this.outputFileStream.WriteLine(
             $"\n{GetDelimiter()} {title_text} {GetDelimiter()}\n");
     }
 
     protected override void PrintUncommentedContentTitle(string source_name)
     {
-        _OutputFileStream.WriteLine(
+        this.outputFileStream.WriteLine(
             $"{GetSubDelimiter()} UNCOMMENTED LINES: {source_name} {GetSubDelimiter()}\n");
     }
 
     protected override void PrintUniqueContentTitle(string source_name)
     {
-        _OutputFileStream.WriteLine(
+        this.outputFileStream.WriteLine(
             $"{GetSubDelimiter()} UNIQUE LINES: {source_name} {GetSubDelimiter()}\n");
     }
 
-
     protected override void PrintLineInfo(LineInfo target_info)
     {
-        _OutputFileStream.Write("LINE: ");
-        PrintLinePairKey(target_info.Content);
-        PrintLinePairValue(target_info.Content);
-        _OutputFileStream.WriteLine();
+        this.outputFileStream.Write("LINE: ");
+        this.PrintLinePairKey(target_info.Content);
+        this.PrintLinePairValue(target_info.Content);
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintLineInfo(KeyValuePair<int, string> pair_info)
     {
-        _OutputFileStream.Write("LINE: ");
-        PrintLinePairKey(pair_info);
-        PrintLinePairValue(pair_info);
-        _OutputFileStream.WriteLine();
+        this.outputFileStream.Write("LINE: ");
+        this.PrintLinePairKey(pair_info);
+        this.PrintLinePairValue(pair_info);
+        this.outputFileStream.WriteLine();
     }
 
     protected override void PrintLineInfo(string target_line)
     {
-        _OutputFileStream.Write("LINE: ");
-        _OutputFileStream.Write($"\'{target_line}\'");
-        _OutputFileStream.WriteLine();
+        this.outputFileStream.Write("LINE: ");
+        this.outputFileStream.Write($"\'{target_line}\'");
+        this.outputFileStream.WriteLine();
     }
-
 
     protected override void PrintLinePairKey(KeyValuePair<int, string> pair)
     {
-        _OutputFileStream.Write($"key = {pair.Key:X} | ");
+        this.outputFileStream.Write($"key = {pair.Key:X} | ");
     }
 
     protected override void PrintLinePairValue(KeyValuePair<int, string> pair)
     {
-        _OutputFileStream.Write($"value = \"{pair.Value}\" | ");
+        this.outputFileStream.Write($"value = \"{pair.Value}\" | ");
     }
 }

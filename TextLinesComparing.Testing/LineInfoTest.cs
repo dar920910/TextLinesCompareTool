@@ -1,82 +1,90 @@
-using TextLinesComparing.Library;
+//-----------------------------------------------------------------------
+// <copyright file="LineInfoTest.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
 
 namespace TextLinesComparing.Testing;
 
+using TextLinesComparing.Library;
+
 public class LineInfoTest
 {
-    private string _ExampleString;
+    private const string LowerTestString = "/aaa/bbb/ccc/ddd/eee/";
+    private const string UpperTestString = "\\AAA\\BBB\\CCC\\DDD\\EEE\\";
 
-    private const string LOWER_TEST_STRING = "/aaa/bbb/ccc/ddd/eee/";
-    private const string UPPER_TEST_STRING = "\\AAA\\BBB\\CCC\\DDD\\EEE\\";
+    private string exampleTestString;
 
     [SetUp]
     public void Setup()
     {
-        _ExampleString = default;
+        this.exampleTestString = default;
     }
 
     [Test]
     public void GetLinePairInfo_TestCase_1()
     {
-        _ExampleString = LOWER_TEST_STRING;
+        this.exampleTestString = LowerTestString;
 
-        Assert.That(actual: new LineInfo(_ExampleString).Content,
+        Assert.That(
+            actual: new LineInfo(this.exampleTestString).Content,
             expression: Is.EqualTo(
                 new KeyValuePair<int, string>(
-                    key: _ExampleString.GetHashCode(), value: _ExampleString)));
+                    key: this.exampleTestString.GetHashCode(), value: this.exampleTestString)));
     }
 
     [Test]
     public void GetLinePairInfo_TestCase_2()
     {
-        _ExampleString = UPPER_TEST_STRING;
+        this.exampleTestString = UpperTestString;
 
-        Assert.That(actual: new LineInfo(_ExampleString).Content,
+        Assert.That(
+            actual: new LineInfo(this.exampleTestString).Content,
             expression: Is.EqualTo(
                 new KeyValuePair<int, string>(
-                    key: _ExampleString.GetHashCode(), value: _ExampleString)));
+                    key: this.exampleTestString.GetHashCode(), value: this.exampleTestString)));
     }
-
 
     [Test]
     public void GetKeyOfPair_TestCase_1()
     {
-        _ExampleString = LOWER_TEST_STRING;
+        this.exampleTestString = LowerTestString;
 
         Assert.That(
-            actual: new LineInfo(_ExampleString).Content.Key,
-            expression: Is.EqualTo(_ExampleString.GetHashCode()));
+            actual: new LineInfo(this.exampleTestString).Content.Key,
+            expression: Is.EqualTo(this.exampleTestString.GetHashCode()));
     }
 
     [Test]
     public void GetKeyOfPair_TestCase_2()
     {
-        _ExampleString = UPPER_TEST_STRING;
+        this.exampleTestString = UpperTestString;
 
         Assert.That(
-            actual: new LineInfo(_ExampleString).Content.Key,
-            expression: Is.EqualTo(_ExampleString.GetHashCode()));
+            actual: new LineInfo(this.exampleTestString).Content.Key,
+            expression: Is.EqualTo(this.exampleTestString.GetHashCode()));
     }
-
 
     [Test]
     public void GetValueOfPair_TestCase_1()
     {
-        _ExampleString = LOWER_TEST_STRING;
+        this.exampleTestString = LowerTestString;
 
         Assert.That(
-            actual: new LineInfo(_ExampleString).Content.Value,
-            expression: Is.EqualTo(_ExampleString));
+            actual: new LineInfo(this.exampleTestString).Content.Value,
+            expression: Is.EqualTo(this.exampleTestString));
     }
 
     [Test]
     public void GetValueOfPair_TestCase_2()
     {
-        _ExampleString = UPPER_TEST_STRING;
+        this.exampleTestString = UpperTestString;
 
         Assert.That(
-            actual: new LineInfo(_ExampleString).Content.Value,
-            expression: Is.EqualTo(_ExampleString));
+            actual: new LineInfo(this.exampleTestString).Content.Value,
+            expression: Is.EqualTo(this.exampleTestString));
     }
 
     [Test]
