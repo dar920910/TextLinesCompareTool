@@ -6,6 +6,9 @@
 
 namespace TextLinesComparing.Library;
 
+using System.Collections;
+using System.Text;
+
 /// <summary>
 /// Represents possible preprocessing operations for an artifact line.
 /// </summary>
@@ -20,6 +23,77 @@ public class LinesPreprocessor
     public LinesPreprocessor(string string_to_processing)
     {
         this.targetLineToProcessing = string_to_processing;
+    }
+
+    /// <summary>
+    ///  Trims all redundant (start/wrapped/end) whitespace characters from an artifact string.
+    /// </summary>
+    /// <param name="artifactString">Source artifact string.</param>
+    /// <returns>Trimmed artifact string.</returns>
+    public static string TrimRedundantWhitespaces(string artifactString)
+    {
+        ArrayList targetWhitespaceIndexes = new ();
+
+        int currentIndex = 0;
+        while (currentIndex < artifactString.Length)
+        {
+            if (GeneralCharacterValidator.IsSpaceCharacter(artifactString[currentIndex]))
+            {
+                int whitespacesBegIndex = currentIndex + 1;
+                int whitespacesEndIndex = whitespacesBegIndex;
+
+                while (whitespacesEndIndex < artifactString.Length)
+                {
+                    if (GeneralCharacterValidator.IsSpaceCharacter(artifactString[whitespacesEndIndex]))
+                    {
+                        targetWhitespaceIndexes.Add(whitespacesEndIndex);
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                    whitespacesEndIndex++;
+                }
+
+                currentIndex = whitespacesEndIndex;
+            }
+
+            currentIndex++;
+        }
+
+        StringBuilder artifactBuilder = new ();
+        for (int index = 0; index < artifactString.Length; index++)
+        {
+            if (targetWhitespaceIndexes.Contains(index))
+            {
+                continue;
+            }
+
+            artifactBuilder.Append(artifactString[index]);
+        }
+
+        return artifactBuilder.ToString();
+    }
+
+    /// <summary>
+    /// Trims all start whitespace characters from an artifact string.
+    /// </summary>
+    /// <param name="artifactString">Source artifact string.</param>
+    /// <returns>Trimmed artifact string.</returns>
+    public static string TrimStartWhitespaces(string artifactString)
+    {
+        return artifactString.TrimStart();
+    }
+
+    /// <summary>
+    /// Trims all end whitespace characters from an artifact string.
+    /// </summary>
+    /// <param name="artifactString">Source artifact string.</param>
+    /// <returns>Trimmed artifact string.</returns>
+    public static string TrimEndWhitespaces(string artifactString)
+    {
+        return artifactString.TrimEnd();
     }
 
     /// <summary>
@@ -118,13 +192,13 @@ public class LinesPreprocessor
         artifact = TrimSingleStringComment(artifact);
 
         // 3. Preprocessing for redunant whitespaces inside the string.
-        artifact = StringsWhitespacesHandler.TrimRedundantWhitespaces(artifact);
+        artifact = TrimRedundantWhitespaces(artifact);
 
         // 4. Preprocessing for redunant whitespaces in the string's start.
-        artifact = StringsWhitespacesHandler.TrimStartWhitespaces(artifact);
+        artifact = TrimStartWhitespaces(artifact);
 
         // 5. Preprocessing for redunant whitespaces in the string's end.
-        artifact = StringsWhitespacesHandler.TrimEndWhitespaces(artifact);
+        artifact = TrimEndWhitespaces(artifact);
 
         return artifact;
     }
