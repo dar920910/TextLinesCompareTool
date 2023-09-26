@@ -1,53 +1,114 @@
+//-----------------------------------------------------------------------
+// <copyright file="SourcesExplorer.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace TextLinesComparing.Library;
 
+/// <summary>
+/// Represents a device to search for artifact strings in source text files.
+/// </summary>
 public class SourcesExplorer
 {
-    private List<SourceInfo> _Sources;
+    private readonly List<SourceInfo> customSources;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SourcesExplorer"/> class.
+    /// </summary>
+    /// <param name="sources">The list of source text files.</param>
     public SourcesExplorer(List<string> sources)
     {
-        _Sources = new List<SourceInfo>();
+        this.customSources = new List<SourceInfo>();
+
         foreach (string source in sources)
         {
-            _Sources.Add(new SourceInfo(source));
+            this.customSources.Add(new SourceInfo(source));
         }
     }
 
+    /// <summary>
+    /// Gets artifacts from sources by using the 'LinesStorageMap' storage container.
+    /// </summary>
+    /// <returns>Result view of found artifacts.</returns>
     public LinesResultView<LinesStorageMap> GetArtifactsFromSourcesAsMapBasedContent()
     {
-        LinesRepository<LinesStorageMap> uncommented_content = ExtractUncommentedMapBasedContent();
-        LinesStorageMap common_content = ExtractCommonContent(uncommented_content);
-        LinesRepository<LinesStorageMap> unique_content = ExtractUniqueContent(uncommented_content, common_content);
+        LinesRepository<LinesStorageMap> uncommented_content = this.ExtractUncommentedMapBasedContent();
+        LinesStorageMap common_content = this.ExtractCommonContent(uncommented_content);
+        LinesRepository<LinesStorageMap> unique_content = this.ExtractUniqueContent(uncommented_content, common_content);
 
         return new LinesResultView<LinesStorageMap>
         {
             ContentFromSources = uncommented_content,
             CommonContentStorage = common_content,
-            UniqueContentRepository = unique_content
+            UniqueContentRepository = unique_content,
         };
     }
 
+    /// <summary>
+    /// Gets artifacts from sources by using the 'LinesStorageSet' storage container.
+    /// </summary>
+    /// <returns>Result view of found artifacts.</returns>
     public LinesResultView<LinesStorageSet> GetArtifactsFromSourcesAsSetBasedContent()
     {
-        LinesRepository<LinesStorageSet> uncommented_content = ExtractUncommentedSetBasedContent();
-        LinesStorageSet common_content = ExtractCommonContent(uncommented_content);
-        LinesRepository<LinesStorageSet> unique_content = ExtractUniqueContent(uncommented_content, common_content);
+        LinesRepository<LinesStorageSet> uncommented_content = this.ExtractUncommentedSetBasedContent();
+        LinesStorageSet common_content = this.ExtractCommonContent(uncommented_content);
+        LinesRepository<LinesStorageSet> unique_content = this.ExtractUniqueContent(uncommented_content, common_content);
 
         return new LinesResultView<LinesStorageSet>
         {
             ContentFromSources = uncommented_content,
             CommonContentStorage = common_content,
-            UniqueContentRepository = unique_content
+            UniqueContentRepository = unique_content,
         };
     }
 
+    private static LinesStorageMap GetArtifactsAsMapBasedStorage(SourceInfo sourceInfo)
+    {
+        LinesStorageMap target_content = new ()
+        {
+            Name = sourceInfo.Name,
+        };
+
+        foreach (string stringFromSource in sourceInfo.Content)
+        {
+            if (LinesPreprocessor.IsArtifact(stringFromSource))
+            {
+                string artifact_string = new LinesPreprocessor(stringFromSource)
+                    .RetrievePreprocessedArtifact();
+                target_content.PutContent(new LineInfo(artifact_string));
+            }
+        }
+
+        return target_content;
+    }
+
+    private static LinesStorageSet GetArtifactsAsSetBasedStorage(SourceInfo sourceInfo)
+    {
+        LinesStorageSet target_content = new ()
+        {
+            Name = sourceInfo.Name,
+        };
+
+        foreach (string stringFromSource in sourceInfo.Content)
+        {
+            if (LinesPreprocessor.IsArtifact(stringFromSource))
+            {
+                string artifact_string = new LinesPreprocessor(stringFromSource).RetrievePreprocessedArtifact();
+                target_content.PutContent(new LineInfo(artifact_string));
+            }
+        }
+
+        return target_content;
+    }
 
     private LinesRepository<LinesStorageMap> ExtractUncommentedMapBasedContent()
     {
-        LinesRepository<LinesStorageMap> uncommented_content = new();
+        LinesRepository<LinesStorageMap> uncommented_content = new ();
 
-        foreach (SourceInfo source in _Sources)
+        foreach (SourceInfo source in this.customSources)
         {
-            uncommented_content.PutContent(source.GetArtifactsAsMapBasedStorage());
+            uncommented_content.PutContent(GetArtifactsAsMapBasedStorage(source));
         }
 
         return uncommented_content;
@@ -55,11 +116,11 @@ public class SourcesExplorer
 
     private LinesRepository<LinesStorageSet> ExtractUncommentedSetBasedContent()
     {
-        LinesRepository<LinesStorageSet> uncommented_content = new();
+        LinesRepository<LinesStorageSet> uncommented_content = new ();
 
-        foreach (SourceInfo source in _Sources)
+        foreach (SourceInfo source in this.customSources)
         {
-            uncommented_content.PutContent(source.GetArtifactsAsSetBasedStorage());
+            uncommented_content.PutContent(GetArtifactsAsSetBasedStorage(source));
         }
 
         return uncommented_content;
@@ -101,7 +162,7 @@ public class SourcesExplorer
 
     private LinesRepository<LinesStorageMap> ExtractUniqueContent(LinesRepository<LinesStorageMap> target_content_repos, LinesStorageMap common_content)
     {
-        LinesRepository<LinesStorageMap> uniqueLinesInAllFiles = new();
+        LinesRepository<LinesStorageMap> uniqueLinesInAllFiles = new ();
 
         foreach (LinesStorageMap content_map in target_content_repos.Content)
         {
@@ -114,7 +175,7 @@ public class SourcesExplorer
 
     private LinesRepository<LinesStorageSet> ExtractUniqueContent(LinesRepository<LinesStorageSet> target_content_repos, LinesStorageSet common_content)
     {
-        LinesRepository<LinesStorageSet> uniqueLinesInAllFiles = new();
+        LinesRepository<LinesStorageSet> uniqueLinesInAllFiles = new ();
 
         foreach (LinesStorageSet content_set in target_content_repos.Content)
         {
@@ -124,4 +185,30 @@ public class SourcesExplorer
 
         return uniqueLinesInAllFiles;
     }
+}
+
+/// <summary>
+/// Represents information about a source text file.
+/// </summary>
+public record SourceInfo
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SourceInfo"/> class.
+    /// </summary>
+    /// <param name="source">Source text file full name.</param>
+    public SourceInfo(string source)
+    {
+        this.Name = source;
+        this.Content = File.ReadAllLines(source);
+    }
+
+    /// <summary>
+    /// Gets the name of the current source.
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    /// Gets the content of the current source.
+    /// </summary>
+    public string[] Content { get; }
 }
