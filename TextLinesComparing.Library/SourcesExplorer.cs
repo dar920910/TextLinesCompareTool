@@ -72,10 +72,9 @@ public class SourcesExplorer
 
         foreach (string stringFromSource in sourceInfo.Content)
         {
-            if (LinesPreprocessor.IsArtifact(stringFromSource))
+            if (LinesArtifactAnalyzer.IsArtifact(stringFromSource))
             {
-                string artifact_string = new LinesPreprocessor(stringFromSource)
-                    .RetrievePreprocessedArtifact();
+                string artifact_string = LinesArtifactAnalyzer.RetrievePreprocessedArtifact(stringFromSource);
                 target_content.PutContent(new LineInfo(artifact_string));
             }
         }
@@ -92,9 +91,9 @@ public class SourcesExplorer
 
         foreach (string stringFromSource in sourceInfo.Content)
         {
-            if (LinesPreprocessor.IsArtifact(stringFromSource))
+            if (LinesArtifactAnalyzer.IsArtifact(stringFromSource))
             {
-                string artifact_string = new LinesPreprocessor(stringFromSource).RetrievePreprocessedArtifact();
+                string artifact_string = LinesArtifactAnalyzer.RetrievePreprocessedArtifact(stringFromSource);
                 target_content.PutContent(new LineInfo(artifact_string));
             }
         }
@@ -136,7 +135,7 @@ public class SourcesExplorer
 
         for (byte index = extractionStartIndex; index < uncommented_content_repos.Count; index++)
         {
-            common_content = LinesMainProcessor.ExtractCommonContent(
+            common_content = LinesArtifactAnalyzer.ExtractCommonContent(
                 common_content, uncommented_content_repos.ElementAt(index));
         }
 
@@ -153,7 +152,7 @@ public class SourcesExplorer
 
         for (byte index = extractionStartIndex; index < uncommented_content_repos.Count; index++)
         {
-            commonLinesSet = LinesMainProcessor.ExtractCommonContent(
+            commonLinesSet = LinesArtifactAnalyzer.ExtractCommonContent(
                 commonLinesSet, uncommented_content_repos.ElementAt(index));
         }
 
@@ -166,7 +165,7 @@ public class SourcesExplorer
 
         foreach (LinesStorageMap content_map in target_content_repos.Content)
         {
-            LinesStorageMap unique_content = LinesMainProcessor.ExtractUniqueContent(content_map, common_content);
+            LinesStorageMap unique_content = LinesArtifactAnalyzer.ExtractUniqueContent(content_map, common_content);
             uniqueLinesInAllFiles.PutContent(unique_content);
         }
 
@@ -179,7 +178,7 @@ public class SourcesExplorer
 
         foreach (LinesStorageSet content_set in target_content_repos.Content)
         {
-            LinesStorageSet unique_content = LinesMainProcessor.ExtractUniqueContent(content_set, common_content);
+            LinesStorageSet unique_content = LinesArtifactAnalyzer.ExtractUniqueContent(content_set, common_content);
             uniqueLinesInAllFiles.PutContent(unique_content);
         }
 

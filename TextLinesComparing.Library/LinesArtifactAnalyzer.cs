@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="LinesPreprocessor.cs" company="Demo Projects Workshop">
+// <copyright file="LinesArtifactAnalyzer.cs" company="Demo Projects Workshop">
 //     Copyright (c) Demo Projects Workshop. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,19 +10,105 @@ using System.Collections;
 using System.Text;
 
 /// <summary>
-/// Represents possible preprocessing operations for an artifact line.
+/// Represents static methods to analyze content of artifact lines.
 /// </summary>
-public class LinesPreprocessor
+public static class LinesArtifactAnalyzer
 {
-    private readonly string targetLineToProcessing;
+    /// <summary>
+    /// Compares content from the first and the second storages and extracts common content for both storages.
+    /// </summary>
+    /// <param name="first_storage">The first storage.</param>
+    /// <param name="second_storage">The second storage.</param>
+    /// <returns>The storage with common content for the both storages.</returns>
+    public static LinesStorageMap ExtractCommonContent(LinesStorageMap first_storage, LinesStorageMap second_storage)
+    {
+        LinesStorageMap common_content = new ();
+
+        Dictionary<int, string> first_map = first_storage.Content;
+        Dictionary<int, string> second_map = second_storage.Content;
+
+        foreach (KeyValuePair<int, string> first_pair in first_map)
+        {
+            foreach (KeyValuePair<int, string> second_pair in second_map)
+            {
+                if (first_pair.Key == second_pair.Key)
+                {
+                    common_content.PutContent(new LineInfo(first_pair));
+                }
+            }
+        }
+
+        return common_content;
+    }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="LinesPreprocessor"/> class.
+    /// Compares content from the first and the second storages and extracts common content for both storages.
     /// </summary>
-    /// <param name="string_to_processing">Source artifact string.</param>
-    public LinesPreprocessor(string string_to_processing)
+    /// <param name="first_storage">The first storage.</param>
+    /// <param name="second_storage">The second storage.</param>
+    /// <returns>The storage with common content for the both storages.</returns>
+    public static LinesStorageSet ExtractCommonContent(LinesStorageSet first_storage, LinesStorageSet second_storage)
     {
-        this.targetLineToProcessing = string_to_processing;
+        SortedSet<string> first_content = first_storage.Content;
+        SortedSet<string> second_content = second_storage.Content;
+        IEnumerable<string> extractedCommonLines = first_content.Intersect(second_content);
+        return new LinesStorageSet(extractedCommonLines);
+    }
+
+    /// <summary>
+    /// Compares content from a target storage with content from a compared source and
+    /// extracts unique content for only this target storage.
+    /// </summary>
+    /// <param name="target_storage">Target storage.</param>
+    /// <param name="compared_storage">Compared storage.</param>
+    /// <returns>The storage with unique content from the target storage.</returns>
+    public static LinesStorageMap ExtractUniqueContent(LinesStorageMap target_storage, LinesStorageMap compared_storage)
+    {
+        LinesStorageMap unique_content_map = new ()
+        {
+            Name = target_storage.Name,
+        };
+
+        Dictionary<int, string> target_content_map = target_storage.Content;
+        Dictionary<int, string> compared_content_map = compared_storage.Content;
+
+        foreach (KeyValuePair<int, string> pair in target_content_map)
+        {
+            if (compared_content_map.ContainsKey(pair.Key) is false)
+            {
+                unique_content_map.PutContent(new LineInfo(pair));
+            }
+        }
+
+        return unique_content_map;
+    }
+
+    /// <summary>
+    /// Compares content from a target storage with content from a compared source and
+    /// extracts unique content for only this target storage.
+    /// </summary>
+    /// <param name="target_storage">Target storage.</param>
+    /// <param name="compared_storage">Compared storage.</param>
+    /// <returns>The storage with unique content from the target storage.</returns>
+    public static LinesStorageSet ExtractUniqueContent(LinesStorageSet target_storage, LinesStorageSet compared_storage)
+    {
+        LinesStorageSet extractedUniqueLines = new ()
+        {
+            Name = target_storage.Name,
+        };
+
+        SortedSet<string> target_content = target_storage.Content;
+        SortedSet<string> compared_content = compared_storage.Content;
+
+        foreach (var target_element in target_content)
+        {
+            if (IsUniqueLineInSource(target_element, compared_content))
+            {
+                extractedUniqueLines.PutContent(new LineInfo(target_element));
+            }
+        }
+
+        return extractedUniqueLines;
     }
 
     /// <summary>
@@ -221,10 +307,11 @@ public class LinesPreprocessor
     /// <summary>
     /// Retrieves the artifact string.
     /// </summary>
+    /// <param name="artifactString">Source artifact string.</param>
     /// <returns>Preprocessed artifact string.</returns>
-    public string RetrievePreprocessedArtifact()
+    public static string RetrievePreprocessedArtifact(string artifactString)
     {
-        string artifact = this.targetLineToProcessing;
+        string artifact = artifactString;
 
         // WARNING:
         // This algorithm of preprocessing has the strict defined order.
@@ -246,6 +333,16 @@ public class LinesPreprocessor
         artifact = TrimEndWhitespaces(artifact);
 
         return artifact;
+    }
+
+    private static bool IsUniqueLineInSource(string unique_object, SortedSet<string> source)
+    {
+        if (source.Contains(unique_object))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private static bool IsLine(string targetString)
