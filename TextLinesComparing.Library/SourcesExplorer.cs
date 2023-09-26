@@ -211,3 +211,24 @@ public record SourceInfo
     /// </summary>
     public string[] Content { get; }
 }
+
+/// <summary>
+/// Represents a result of made analysis of content from source text files.
+/// </summary>
+public record LinesResultView<T>
+{
+    /// <summary>
+    /// Gets or sets the repository to keep original content from sources.
+    /// </summary>
+    public LinesRepository<T> ContentFromSources { get; set; }
+
+    /// <summary>
+    /// Gets or sets the storage to keep common content for all sources.
+    /// </summary>
+    public T CommonContentStorage { get; set; }
+
+    /// <summary>
+    /// Gets or sets the repository to keep unique content from every source.
+    /// </summary>
+    public LinesRepository<T> UniqueContentRepository { get; set; }
+}
