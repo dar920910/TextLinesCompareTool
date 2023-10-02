@@ -9,19 +9,25 @@ using TextLinesComparing.Library;
 
 Stopwatch stopwatch = new ();
 stopwatch.Start();
+OutputInfo outputInfo = new ();
 
 List<string> sources = new ();
-for (int source_index = 1; source_index < args.Length; source_index++)
+
+for (int source_index = 0; source_index < args.Length; source_index++)
 {
+    string argument = args[source_index];
+
+    if (argument.EndsWith(".exe") || outputInfo.IsOutputParameter(argument))
+    {
+        continue;
+    }
+
     sources.Add(args[source_index]);
 }
 
 SourcesExplorer explorer = new (sources);
 LinesResultView artifacts = explorer.GetArtifactsFromSources();
-
-new OutputConsolePrinter().PrintArtifacts(artifacts);
-new OutputFilePrinter().PrintArtifacts(artifacts);
-new OutputWebPrinter().PrintArtifacts(artifacts);
+outputInfo.PrintArtifacts(artifacts);
 
 stopwatch.Stop();
 Console.WriteLine($"[INFO] Program's Execution Time: {stopwatch.Elapsed}\n");

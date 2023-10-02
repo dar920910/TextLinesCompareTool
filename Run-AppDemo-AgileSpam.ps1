@@ -13,5 +13,5 @@ $src_8="Examples/agile-spam/AGILE-HUN.txt"
 $src_9="Examples/agile-spam/AGILE-ITA.txt"
 
 Write-Host "`n -> Executing the Program:`n"
-& ".\$BUILD_DIRECTORY\$EXECUTABLE" $src_0 $src_1 $src_2 $src_3 $src_4 $src_5 $src_6 $src_7 $src_8 $src_9
+& ".\$BUILD_DIRECTORY\$EXECUTABLE" --output-file --output-web $src_0 $src_1 $src_2 $src_3 $src_4 $src_5 $src_6 $src_7 $src_8 $src_9
 Write-Host "`n"
