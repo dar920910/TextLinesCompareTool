@@ -57,11 +57,6 @@ The repository also contains example files to testing the app. You may try these
 
 ### :computer: Using Project's Console Application
 
-1. Run the program from the command-line to create the configuration default template when the first launching.
-2. Open the generated **config.xml** file from the appeared the **storage** folder in your favorite text editor.
-3. Create your own description to generate custom file objects. See the "Reference" section below to get help.
-4. Run the program after configuration creating is finished. Your generated files are in the **storage/out** directory.
-
 You should pass command-line arguments to successfully run the program.
 
 Use the following format of the command:
