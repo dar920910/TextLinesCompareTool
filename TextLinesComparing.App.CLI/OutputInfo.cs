@@ -46,7 +46,7 @@ internal struct OutputInfo
         WriteLine($"dotnet run {ResultWebOutputParameter} {source_1} {source_2} {source_3}");
         WriteLine(
             $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} " +
-                $"{ResultFileOutputParameter} {ResultWebOutputParameter}" +
+                $"{ResultFileOutputParameter} {ResultWebOutputParameter} " +
                     $"{source_1} {source_2} {source_3} {source_4} {source_5}");
         WriteLine();
     }

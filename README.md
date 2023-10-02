@@ -29,12 +29,20 @@ This repository contains the following projects:
 - **TextLinesComparing.App.CLI** - implements the console application for the project
 - **TextLinesComparing.App.Web** - implements the ASP.NET Core Razor Pages web application for the project
 
-The repository also contains example files to testing the app:
+The repository also contains example files to testing the app. You may try these examples via running scripts:
 
-- Examples/agile-spam
-- Examples/comments
-- Examples/lorem-ipsum
-- Examples/my-tests
+- **Examples/agile-spam**
+  - Windows: Run-AppDemo-AgileSpam.ps1
+  - Docker: demo-agilespam.bash
+- **Examples/comments**
+  - Windows: Run-AppDemo-Comments.ps1
+  - Docker: demo-comments.bash
+- **Examples/lorem-ipsum**
+  - Windows: Run-AppDemo-LoremIpsum.ps1
+  - Docker: demo-loremipsum.bash
+- **Examples/my-tests**
+  - Windows: Run-AppDemo-MyTests.ps1
+  - Docker: demo-mytests.bash
 
 ---
 
@@ -84,7 +92,7 @@ This parameter adds output of results to a web page.
 
 **Example 4:** Parse five text files and output of results to console, a text file, and a HTML document (this example use executable file name instead of **dotnet run** command):
 
-    TextLinesComparing.App.CLI --output-file --output-web./source_1.txt ./source_2.txt ./source_3.txt ./source_4.txt ./source_5.txt
+    TextLinesComparing.App.CLI --output-file --output-web ./source_1.txt ./source_2.txt ./source_3.txt ./source_4.txt ./source_5.txt
 
 ---
 
