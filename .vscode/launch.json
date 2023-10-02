@@ -10,8 +10,8 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/TextLinesComparing.App.CLI/bin/Debug/net6.0/TextLinesComparing.App.CLI.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}",
+            "args": [ "..\\Examples\\my-tests\\test_1.txt", "..\\Examples\\my-tests\\test_2.txt", "tttttttt", "eeeeee", "gggggg", "hhhhh" ],
+            "cwd": "${workspaceFolder}/TextLinesComparing.App.CLI/",
             "stopAtEntry": false,
             "console": "internalConsole"
         },
