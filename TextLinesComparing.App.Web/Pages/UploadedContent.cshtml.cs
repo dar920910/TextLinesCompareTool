@@ -21,7 +21,7 @@ public class UploadedContentModel : PageModel
 
     public void OnGet()
     {
-        this.ViewData["Title"] = "TextLinesCompareTool (Uploaded Files)";
+        this.ViewData["Title"] = "TextLinesCompareTool";
     }
 
     public IActionResult OnPost()

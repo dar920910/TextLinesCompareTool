@@ -33,12 +33,12 @@ public class ResultsModel : PageModel
 
     public static string GetLineInfo(string target_line) => $"\'{target_line}\'";
 
-    public static string GetLinePairKey(KeyValuePair<int, string> pair) => $"key = {pair.Key:X} | ";
+    public static string GetLinePairKey(KeyValuePair<int, string> pair) => $"[{pair.Key:X}] ";
 
-    public static string GetLinePairValue(KeyValuePair<int, string> pair) => $"value = \"{pair.Value}\" | ";
+    public static string GetLinePairValue(KeyValuePair<int, string> pair) => $"\"{pair.Value}\"";
 
     public void OnGet()
     {
-        this.ViewData["Title"] = "Analysis Results";
+        this.ViewData["Title"] = "TextLinesCompareTool";
     }
 }

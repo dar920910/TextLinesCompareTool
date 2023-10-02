@@ -3,7 +3,10 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div>
-    <h1>Welcome to the @ViewData["Title"]</h1>
+    <h1 class="display-4">Welcome to the @ViewData["Title"]!</h1>
+</div>
+<div>
+    <h2 class="display-6">Select Local Text Files to Upload on the Server:</h2>
 </div>
 <div>
     <form asp-page-handler="UploadFiles" method="POST" enctype="multipart/form-data">
@@ -43,9 +46,8 @@
             <input type="file" class="form-control" asp-for="Upload_9"/>
             <label class="input-group-text">Upload a Local File # 9</label>
         </div>
-        <div>
-            <input type="submit" class="btn btn-primary" value="Process Uploaded Files">
-            <a class="btn btn-primary" href="/uploadedcontent">Show Uploaded Files</a>
+        <div class="d-grid gap-2">
+            <input type="submit" class="btn btn-primary" value="Upload Files to the Server">
         </div>
     </form>
 </div>

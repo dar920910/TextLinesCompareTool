@@ -55,10 +55,10 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        this.ViewData["Title"] = "TextLinesCompareTool (Select Files to Upload)";
+        this.ViewData["Title"] = "TextLinesCompareTool";
     }
 
-    public async Task OnPostUploadFilesAsync()
+    public async Task<IActionResult> OnPostUploadFilesAsync()
     {
         IFormFile[] uploads =
         {
@@ -91,5 +91,6 @@ public class IndexModel : PageModel
         }
 
         UploadsStore.UploadedFilePaths = uploadedFilePaths;
+        return this.RedirectToPage("/uploadedcontent");
     }
 }

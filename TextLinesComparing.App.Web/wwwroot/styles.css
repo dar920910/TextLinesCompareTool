@@ -1,11 +1,11 @@
 .all {
-    color: green; font-size: 125%;
+    color: green; font-size: 14px;
 }
 
 .common {
-    color: red; font-size: 125%;
+    color: red; font-size: 14px;
 }
 
 .unique {
-    color: blue; font-size: 125%;
+    color: blue; font-size: 14px;
 }

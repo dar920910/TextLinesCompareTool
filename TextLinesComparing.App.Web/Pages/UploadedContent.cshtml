@@ -3,7 +3,10 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div>
-    <h1>RESULTS: @ViewData["Title"]</h1>
+    <h1 class="display-4">Uploaded Files</h1>
+</div>
+<hr>
+<div>
     @foreach(string @uploadedFile in @Model.UploadedFiles)
     {
         <p>@uploadedFile</p>
@@ -11,8 +14,8 @@
 </div>
 <hr>
 <div>
-    <form method="POST">
+    <form class="d-grid gap-2" method="POST">
         <input type="submit" class="btn btn-primary" value="Execute Analysis of Uploaded Files"/>
+        <a class="btn btn-primary" href="/">Return to the Home Page</a>
     </form>
-    <a class="btn btn-primary" href="/">Return to the Home Page</a>
 </div>

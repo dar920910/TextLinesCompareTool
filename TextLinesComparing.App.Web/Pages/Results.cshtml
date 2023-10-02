@@ -3,48 +3,56 @@
 @model ResultsModel
 
 <div>
-    <h1>RESULTS: @ViewData["Title"]</h1>
+    <h1 class="display-4">Analysis Results</h1>
 </div>
 <hr>
-<a class="btn btn-primary" href="/">Return to the Home Page</a>
-
+<div class="d-grid gap-2">
+    <a class="btn btn-primary" href="/">Return to the Home Page</a>
+</div>
+<hr>
 <div>
-    <h2>UNCOMMENTED LINES FROM ALL FILES</h2>
+    <h2 class="display-6">Uncommented Lines from All Files</h2>
     @foreach (LinesStorage @content_element in @Model.Artifacts.ContentFromSources)
     {
-        <h3>
-            @ResultsModel.GetSubDelimiter() UNCOMMENTED LINES: @content_element.Name @ResultsModel.GetSubDelimiter()
-        </h3>
+        <h4>Uncommented Lines From:</h4>
+        <p class=".lead">"@content_element.Name"</p>
         <br>
         @foreach (KeyValuePair<int, string> @uncommented_line in @content_element.Content)
         {
-            <p class='all'>LINE: @ResultsModel.GetLineInfo(uncommented_line);</p>
+            <p class='all'>@ResultsModel.GetLineInfo(uncommented_line);</p>
         }
         <br>
     }
 </div>
+<hr>
 <div>
-    <h3>@ResultsModel.GetDelimiter() COMMON LINES MAP @ResultsModel.GetDelimiter()</h3>
+    <h2 class="display-6">Common Lines</h2>
     <br>
     @foreach (KeyValuePair<int, string> @element in @Model.Artifacts.CommonContentStorage.Content)
     {
-        <p class='common'>LINE: @ResultsModel.GetLineInfo(element);</p>
+        <p class='common'>@ResultsModel.GetLineInfo(element);</p>
     }
     <br>
 </div>
+<hr>
 <div>
     <br>
-    <h3>@ResultsModel.GetDelimiter() UNIQUE LINES MAPS (HASH + STRING) @ResultsModel.GetDelimiter()</h3>
+    <h2 class="display-6">Unique Lines</h2>
     <br>
     @foreach (LinesStorage @content_element in @Model.Artifacts.UniqueContentRepository)
     {
-        <h4>@ResultsModel.GetSubDelimiter() UNIQUE LINES: @content_element.Name @ResultsModel.GetSubDelimiter()</h4>
+        <h4>Unique Lines From:</h4>
+        <p class=".lead">"@content_element.Name"</p>
         <br>
         foreach (KeyValuePair<int, string> @content_pair in @content_element.Content)
         {
-            <p class='unique'>LINE: @ResultsModel.GetLineInfo(content_pair);</p>
+            <p class='unique'>@ResultsModel.GetLineInfo(content_pair);</p>
         }
         <br>
     }
     <br>
+</div>
+<hr>
+<div class="d-grid gap-2">
+    <a class="btn btn-primary" href="/">Return to the Home Page</a>
 </div>
