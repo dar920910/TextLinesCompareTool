@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="LinesStorageMap.cs" company="Demo Projects Workshop">
+// <copyright file="LinesStorage.cs" company="Demo Projects Workshop">
 //     Copyright (c) Demo Projects Workshop. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -8,17 +8,17 @@
 
 namespace TextLinesComparing.Library;
 
-public class LinesStorageMap
+public class LinesStorage
 {
     private readonly Dictionary<int, string> currentLinesMap;
 
-    public LinesStorageMap()
+    public LinesStorage()
     {
         this.currentLinesMap = new Dictionary<int, string>();
         this.Name = "Lines Storage Map";
     }
 
-    public LinesStorageMap(LineInfo info, string name = "Lines Storage Map")
+    public LinesStorage(LineInfo info, string name = "Lines Storage Map")
     {
         this.currentLinesMap = new Dictionary<int, string>()
         {

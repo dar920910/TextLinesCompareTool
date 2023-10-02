@@ -16,27 +16,16 @@ public class OutputConsolePrinter : OutputAbstractDevice
     {
     }
 
-    protected override void PrintUncommentedContent(LinesRepository<LinesStorageMap> content_repos)
+    protected override void PrintUncommentedContent(List<LinesStorage> content_repos)
     {
         this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
-        List<LinesStorageMap> content_collection = content_repos.Content;
-        foreach (var content_element in content_collection)
+        foreach (var content_element in content_repos)
         {
             this.PrintUncommentedContent(content_element);
         }
     }
 
-    protected override void PrintUncommentedContent(LinesRepository<LinesStorageSet> content_repos)
-    {
-        this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
-        List<LinesStorageSet> content_collection = content_repos.Content;
-        foreach (LinesStorageSet content_element in content_collection)
-        {
-            this.PrintUncommentedContent(content_element);
-        }
-    }
-
-    protected override void PrintUncommentedContent(LinesStorageMap target_content)
+    protected override void PrintUncommentedContent(LinesStorage target_content)
     {
         this.PrintUncommentedContentTitle(target_content.Name);
         Dictionary<int, string> uncommented_lines = target_content.Content;
@@ -49,25 +38,10 @@ public class OutputConsolePrinter : OutputAbstractDevice
         WriteLine();
     }
 
-    protected override void PrintUncommentedContent(LinesStorageSet target_content)
-    {
-        this.PrintUncommentedContentTitle(target_content.Name);
-        SortedSet<string> uncommented_lines = target_content.Content;
-
-        foreach (string uncommented_line in uncommented_lines)
-        {
-            this.PrintLineInfo(uncommented_line);
-        }
-
-        WriteLine();
-    }
-
-    protected override void PrintUniqueContent(LinesRepository<LinesStorageMap> repos)
+    protected override void PrintUniqueContent(List<LinesStorage> repos)
     {
         this.PrintContentTitle("UNIQUE LINES MAPS (HASH + STRING)");
-        List<LinesStorageMap> content_collection = repos.Content;
-
-        foreach (var content_element in content_collection)
+        foreach (var content_element in repos)
         {
             this.PrintUniqueContent(content_element);
         }
@@ -75,19 +49,7 @@ public class OutputConsolePrinter : OutputAbstractDevice
         WriteLine();
     }
 
-    protected override void PrintUniqueContent(LinesRepository<LinesStorageSet> repos)
-    {
-        this.PrintContentTitle("UNIQUE LINES (SETS OF STRINGS)");
-
-        foreach (LinesStorageSet unique_object in repos.Content)
-        {
-            this.PrintUniqueContent(unique_object);
-        }
-
-        WriteLine();
-    }
-
-    protected override void PrintUniqueContent(LinesStorageMap content_element)
+    protected override void PrintUniqueContent(LinesStorage content_element)
     {
         this.PrintUniqueContentTitle(content_element.Name);
 
@@ -100,20 +62,7 @@ public class OutputConsolePrinter : OutputAbstractDevice
         WriteLine();
     }
 
-    protected override void PrintUniqueContent(LinesStorageSet content_element)
-    {
-        this.PrintUniqueContentTitle(content_element.Name);
-        SortedSet<string> content_element_set = content_element.Content;
-
-        foreach (var content_unit in content_element_set)
-        {
-            this.PrintLineInfo(content_unit);
-        }
-
-        WriteLine();
-    }
-
-    protected override void PrintCommonContent(LinesStorageMap target_content)
+    protected override void PrintCommonContent(LinesStorage target_content)
     {
         this.PrintContentTitle("COMMON LINES MAP");
         Dictionary<int, string> target_content_map = target_content.Content;
@@ -121,18 +70,6 @@ public class OutputConsolePrinter : OutputAbstractDevice
         foreach (KeyValuePair<int, string> element in target_content_map)
         {
             this.PrintLineInfo(element);
-        }
-
-        WriteLine();
-    }
-
-    protected override void PrintCommonContent(LinesStorageSet target_content)
-    {
-        this.PrintContentTitle("COMMON LINES SET");
-        SortedSet<string> target_content_set = target_content.Content;
-        foreach (string common_line in target_content_set)
-        {
-            this.PrintLineInfo(common_line);
         }
 
         WriteLine();

@@ -20,9 +20,9 @@ public static class LinesArtifactAnalyzer
     /// <param name="first_storage">The first storage.</param>
     /// <param name="second_storage">The second storage.</param>
     /// <returns>The storage with common content for the both storages.</returns>
-    public static LinesStorageMap ExtractCommonContent(LinesStorageMap first_storage, LinesStorageMap second_storage)
+    public static LinesStorage ExtractCommonContent(LinesStorage first_storage, LinesStorage second_storage)
     {
-        LinesStorageMap common_content = new ();
+        LinesStorage common_content = new ();
 
         Dictionary<int, string> first_map = first_storage.Content;
         Dictionary<int, string> second_map = second_storage.Content;
@@ -42,29 +42,15 @@ public static class LinesArtifactAnalyzer
     }
 
     /// <summary>
-    /// Compares content from the first and the second storages and extracts common content for both storages.
-    /// </summary>
-    /// <param name="first_storage">The first storage.</param>
-    /// <param name="second_storage">The second storage.</param>
-    /// <returns>The storage with common content for the both storages.</returns>
-    public static LinesStorageSet ExtractCommonContent(LinesStorageSet first_storage, LinesStorageSet second_storage)
-    {
-        SortedSet<string> first_content = first_storage.Content;
-        SortedSet<string> second_content = second_storage.Content;
-        IEnumerable<string> extractedCommonLines = first_content.Intersect(second_content);
-        return new LinesStorageSet(extractedCommonLines);
-    }
-
-    /// <summary>
     /// Compares content from a target storage with content from a compared source and
     /// extracts unique content for only this target storage.
     /// </summary>
     /// <param name="target_storage">Target storage.</param>
     /// <param name="compared_storage">Compared storage.</param>
     /// <returns>The storage with unique content from the target storage.</returns>
-    public static LinesStorageMap ExtractUniqueContent(LinesStorageMap target_storage, LinesStorageMap compared_storage)
+    public static LinesStorage ExtractUniqueContent(LinesStorage target_storage, LinesStorage compared_storage)
     {
-        LinesStorageMap unique_content_map = new ()
+        LinesStorage unique_content_map = new ()
         {
             Name = target_storage.Name,
         };
@@ -81,34 +67,6 @@ public static class LinesArtifactAnalyzer
         }
 
         return unique_content_map;
-    }
-
-    /// <summary>
-    /// Compares content from a target storage with content from a compared source and
-    /// extracts unique content for only this target storage.
-    /// </summary>
-    /// <param name="target_storage">Target storage.</param>
-    /// <param name="compared_storage">Compared storage.</param>
-    /// <returns>The storage with unique content from the target storage.</returns>
-    public static LinesStorageSet ExtractUniqueContent(LinesStorageSet target_storage, LinesStorageSet compared_storage)
-    {
-        LinesStorageSet extractedUniqueLines = new ()
-        {
-            Name = target_storage.Name,
-        };
-
-        SortedSet<string> target_content = target_storage.Content;
-        SortedSet<string> compared_content = compared_storage.Content;
-
-        foreach (var target_element in target_content)
-        {
-            if (IsUniqueLineInSource(target_element, compared_content))
-            {
-                extractedUniqueLines.PutContent(new LineInfo(target_element));
-            }
-        }
-
-        return extractedUniqueLines;
     }
 
     /// <summary>

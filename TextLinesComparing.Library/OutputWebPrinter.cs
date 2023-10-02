@@ -28,7 +28,7 @@ public class OutputWebPrinter : OutputAbstractDevice
         }
     }
 
-    public override void PrintArtifacts(LinesResultView<LinesStorageMap> result_artifact)
+    public override void PrintArtifacts(LinesResultView result_artifact)
     {
         string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + ResultFileExtension;
         string outputFilePath = Path.Combine(this.outputDirectoryPath, outputFileName);
@@ -43,42 +43,17 @@ public class OutputWebPrinter : OutputAbstractDevice
         this.webOutputFileStream.Close();
     }
 
-    public override void PrintArtifacts(LinesResultView<LinesStorageSet> result_artifact)
-    {
-        string outputFileName = DatetimeUtilities.GetCurrentDatetimeText() + ResultFileExtension;
-        string outputFilePath = Path.Combine(this.outputDirectoryPath, outputFileName);
-        this.webOutputFileStream = new (outputFilePath);
-
-        this.webOutputFileStream.WriteLine(GenerateWebPageBegin());
-        this.PrintUncommentedContent(result_artifact.ContentFromSources);
-        this.PrintUniqueContent(result_artifact.UniqueContentRepository);
-        this.PrintCommonContent(result_artifact.CommonContentStorage);
-        this.webOutputFileStream.WriteLine(GenerateWebPageEnd());
-
-        this.webOutputFileStream.Close();
-    }
-
-    protected override void PrintUncommentedContent(LinesRepository<LinesStorageMap> content_repos)
+    protected override void PrintUncommentedContent(List<LinesStorage> content_repos)
     {
         this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
 
-        foreach (LinesStorageMap content_element in content_repos.Content)
+        foreach (LinesStorage content_element in content_repos)
         {
             this.PrintUncommentedContent(content_element);
         }
     }
 
-    protected override void PrintUncommentedContent(LinesRepository<LinesStorageSet> content_repos)
-    {
-        this.PrintContentTitle("UNCOMMENTED LINES FROM ALL FILES");
-
-        foreach (LinesStorageSet content_element in content_repos.Content)
-        {
-            this.PrintUncommentedContent(content_element);
-        }
-    }
-
-    protected override void PrintUncommentedContent(LinesStorageMap target_content)
+    protected override void PrintUncommentedContent(LinesStorage target_content)
     {
         this.PrintUncommentedContentTitle(target_content.Name);
 
@@ -93,26 +68,11 @@ public class OutputWebPrinter : OutputAbstractDevice
         this.webOutputFileStream.WriteLine("<br>\n");
     }
 
-    protected override void PrintUncommentedContent(LinesStorageSet target_content)
-    {
-        this.PrintUncommentedContentTitle(target_content.Name);
-
-        foreach (string uncommented_line in target_content.Content)
-        {
-            this.webOutputFileStream.Write("<p>");
-            this.webOutputFileStream.Write("LINE: ");
-            this.PrintLineInfo(uncommented_line);
-            this.webOutputFileStream.Write("</p>\n");
-        }
-
-        this.webOutputFileStream.WriteLine("<br>\n");
-    }
-
-    protected override void PrintUniqueContent(LinesRepository<LinesStorageMap> repos)
+    protected override void PrintUniqueContent(List<LinesStorage> repos)
     {
         this.PrintContentTitle("UNIQUE LINES MAPS (HASH + STRING)");
 
-        foreach (LinesStorageMap content_element in repos.Content)
+        foreach (LinesStorage content_element in repos)
         {
             this.PrintUniqueContent(content_element);
         }
@@ -120,18 +80,7 @@ public class OutputWebPrinter : OutputAbstractDevice
         this.webOutputFileStream.WriteLine("<br>\n");
     }
 
-    protected override void PrintUniqueContent(LinesRepository<LinesStorageSet> repos)
-    {
-        this.PrintContentTitle("UNIQUE LINES (SETS OF STRINGS)");
-        foreach (LinesStorageSet unique_object in repos.Content)
-        {
-            this.PrintUniqueContent(unique_object);
-        }
-
-        this.webOutputFileStream.WriteLine("<br>\n");
-    }
-
-    protected override void PrintUniqueContent(LinesStorageMap content_element)
+    protected override void PrintUniqueContent(LinesStorage content_element)
     {
         this.PrintUniqueContentTitle(content_element.Name);
 
@@ -146,22 +95,7 @@ public class OutputWebPrinter : OutputAbstractDevice
         this.webOutputFileStream.WriteLine("<br>");
     }
 
-    protected override void PrintUniqueContent(LinesStorageSet content_element)
-    {
-        this.PrintUniqueContentTitle(content_element.Name);
-
-        foreach (string content_unit in content_element.Content)
-        {
-            this.webOutputFileStream.Write("<p class='unique'>");
-            this.webOutputFileStream.Write("LINE: ");
-            this.PrintLineInfo(content_unit);
-            this.webOutputFileStream.Write("</p>\n");
-        }
-
-        this.webOutputFileStream.WriteLine("<br>\n");
-    }
-
-    protected override void PrintCommonContent(LinesStorageMap target_content)
+    protected override void PrintCommonContent(LinesStorage target_content)
     {
         this.PrintContentTitle("COMMON LINES MAP");
 
@@ -170,21 +104,6 @@ public class OutputWebPrinter : OutputAbstractDevice
             this.webOutputFileStream.Write("<p class='common'>");
             this.webOutputFileStream.Write("LINE: ");
             this.PrintLineInfo(element);
-            this.webOutputFileStream.Write("</p>\n");
-        }
-
-        this.webOutputFileStream.WriteLine("<br>\n");
-    }
-
-    protected override void PrintCommonContent(LinesStorageSet target_content)
-    {
-        this.PrintContentTitle("COMMON LINES SET");
-
-        foreach (string common_line in target_content.Content)
-        {
-            this.webOutputFileStream.Write("<p class='common'>");
-            this.webOutputFileStream.Write("LINE: ");
-            this.PrintLineInfo(common_line);
             this.webOutputFileStream.Write("</p>\n");
         }
 

@@ -15,10 +15,10 @@ public class ResultsModel : PageModel
     public ResultsModel()
     {
         SourcesExplorer explorer = new (UploadsStore.UploadedFilePaths);
-        this.Artifacts = explorer.GetArtifactsFromSourcesAsMapBasedContent();
+        this.Artifacts = explorer.GetArtifactsFromSources();
     }
 
-    public LinesResultView<LinesStorageMap> Artifacts { get; }
+    public LinesResultView Artifacts { get; }
 
     public static string GetDelimiter() => new ('=', 10);
 

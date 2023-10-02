@@ -10,7 +10,7 @@
 
 <div>
     <h2>UNCOMMENTED LINES FROM ALL FILES</h2>
-    @foreach (LinesStorageMap @content_element in @Model.Artifacts.ContentFromSources.Content)
+    @foreach (LinesStorage @content_element in @Model.Artifacts.ContentFromSources)
     {
         <h3>
             @ResultsModel.GetSubDelimiter() UNCOMMENTED LINES: @content_element.Name @ResultsModel.GetSubDelimiter()
@@ -36,7 +36,7 @@
     <br>
     <h3>@ResultsModel.GetDelimiter() UNIQUE LINES MAPS (HASH + STRING) @ResultsModel.GetDelimiter()</h3>
     <br>
-    @foreach (LinesStorageMap @content_element in @Model.Artifacts.UniqueContentRepository.Content)
+    @foreach (LinesStorage @content_element in @Model.Artifacts.UniqueContentRepository)
     {
         <h4>@ResultsModel.GetSubDelimiter() UNIQUE LINES: @content_element.Name @ResultsModel.GetSubDelimiter()</h4>
         <br>

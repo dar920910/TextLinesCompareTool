@@ -28,16 +28,17 @@ public class SourcesExplorer
     }
 
     /// <summary>
-    /// Gets artifacts from sources by using the 'LinesStorageMap' storage container.
+    /// Gets artifacts from sources.
     /// </summary>
     /// <returns>Result view of found artifacts.</returns>
-    public LinesResultView<LinesStorageMap> GetArtifactsFromSourcesAsMapBasedContent()
+    public LinesResultView GetArtifactsFromSources()
     {
-        LinesRepository<LinesStorageMap> uncommented_content = this.ExtractUncommentedMapBasedContent();
-        LinesStorageMap common_content = this.ExtractCommonContent(uncommented_content);
-        LinesRepository<LinesStorageMap> unique_content = this.ExtractUniqueContent(uncommented_content, common_content);
+        List<LinesStorage> uncommented_content = this.ExtractUncommentedContent();
 
-        return new LinesResultView<LinesStorageMap>
+        LinesStorage common_content = ExtractCommonContent(uncommented_content);
+        List<LinesStorage> unique_content = ExtractUniqueContent(uncommented_content, common_content);
+
+        return new LinesResultView
         {
             ContentFromSources = uncommented_content,
             CommonContentStorage = common_content,
@@ -45,144 +46,65 @@ public class SourcesExplorer
         };
     }
 
-    /// <summary>
-    /// Gets artifacts from sources by using the 'LinesStorageSet' storage container.
-    /// </summary>
-    /// <returns>Result view of found artifacts.</returns>
-    public LinesResultView<LinesStorageSet> GetArtifactsFromSourcesAsSetBasedContent()
-    {
-        LinesRepository<LinesStorageSet> uncommented_content = this.ExtractUncommentedSetBasedContent();
-        LinesStorageSet common_content = this.ExtractCommonContent(uncommented_content);
-        LinesRepository<LinesStorageSet> unique_content = this.ExtractUniqueContent(uncommented_content, common_content);
-
-        return new LinesResultView<LinesStorageSet>
-        {
-            ContentFromSources = uncommented_content,
-            CommonContentStorage = common_content,
-            UniqueContentRepository = unique_content,
-        };
-    }
-
-    private static LinesStorageMap GetArtifactsAsMapBasedStorage(SourceInfo sourceInfo)
-    {
-        LinesStorageMap target_content = new ()
-        {
-            Name = sourceInfo.Name,
-        };
-
-        foreach (string stringFromSource in sourceInfo.Content)
-        {
-            if (LinesArtifactAnalyzer.IsArtifact(stringFromSource))
-            {
-                string artifact_string = LinesArtifactAnalyzer.RetrievePreprocessedArtifact(stringFromSource);
-                target_content.PutContent(new LineInfo(artifact_string));
-            }
-        }
-
-        return target_content;
-    }
-
-    private static LinesStorageSet GetArtifactsAsSetBasedStorage(SourceInfo sourceInfo)
-    {
-        LinesStorageSet target_content = new ()
-        {
-            Name = sourceInfo.Name,
-        };
-
-        foreach (string stringFromSource in sourceInfo.Content)
-        {
-            if (LinesArtifactAnalyzer.IsArtifact(stringFromSource))
-            {
-                string artifact_string = LinesArtifactAnalyzer.RetrievePreprocessedArtifact(stringFromSource);
-                target_content.PutContent(new LineInfo(artifact_string));
-            }
-        }
-
-        return target_content;
-    }
-
-    private LinesRepository<LinesStorageMap> ExtractUncommentedMapBasedContent()
-    {
-        LinesRepository<LinesStorageMap> uncommented_content = new ();
-
-        foreach (SourceInfo source in this.customSources)
-        {
-            uncommented_content.PutContent(GetArtifactsAsMapBasedStorage(source));
-        }
-
-        return uncommented_content;
-    }
-
-    private LinesRepository<LinesStorageSet> ExtractUncommentedSetBasedContent()
-    {
-        LinesRepository<LinesStorageSet> uncommented_content = new ();
-
-        foreach (SourceInfo source in this.customSources)
-        {
-            uncommented_content.PutContent(GetArtifactsAsSetBasedStorage(source));
-        }
-
-        return uncommented_content;
-    }
-
-    private LinesStorageMap ExtractCommonContent(LinesRepository<LinesStorageMap> target_content_repos)
+    private static LinesStorage ExtractCommonContent(List<LinesStorage> target_content_repos)
     {
         const byte storageInitializationIndex = 0;
         const byte extractionStartIndex = 1;
 
-        List<LinesStorageMap> uncommented_content_repos = target_content_repos.Content;
-        LinesStorageMap common_content = uncommented_content_repos.ElementAt(storageInitializationIndex);
+        LinesStorage common_content = target_content_repos.ElementAt(storageInitializationIndex);
 
-        for (byte index = extractionStartIndex; index < uncommented_content_repos.Count; index++)
+        for (byte index = extractionStartIndex; index < target_content_repos.Count; index++)
         {
             common_content = LinesArtifactAnalyzer.ExtractCommonContent(
-                common_content, uncommented_content_repos.ElementAt(index));
+                common_content, target_content_repos.ElementAt(index));
         }
 
         return common_content;
     }
 
-    private LinesStorageSet ExtractCommonContent(LinesRepository<LinesStorageSet> target_content_repos)
+    private static List<LinesStorage> ExtractUniqueContent(List<LinesStorage> target_content_repos, LinesStorage common_content)
     {
-        const byte storageInitializationIndex = 0;
-        const byte extractionStartIndex = 1;
+        List<LinesStorage> uniqueLinesInAllFiles = new ();
 
-        List<LinesStorageSet> uncommented_content_repos = target_content_repos.Content;
-        LinesStorageSet commonLinesSet = uncommented_content_repos.ElementAt(storageInitializationIndex);
-
-        for (byte index = extractionStartIndex; index < uncommented_content_repos.Count; index++)
+        foreach (LinesStorage content_map in target_content_repos)
         {
-            commonLinesSet = LinesArtifactAnalyzer.ExtractCommonContent(
-                commonLinesSet, uncommented_content_repos.ElementAt(index));
-        }
-
-        return commonLinesSet;
-    }
-
-    private LinesRepository<LinesStorageMap> ExtractUniqueContent(LinesRepository<LinesStorageMap> target_content_repos, LinesStorageMap common_content)
-    {
-        LinesRepository<LinesStorageMap> uniqueLinesInAllFiles = new ();
-
-        foreach (LinesStorageMap content_map in target_content_repos.Content)
-        {
-            LinesStorageMap unique_content = LinesArtifactAnalyzer.ExtractUniqueContent(content_map, common_content);
-            uniqueLinesInAllFiles.PutContent(unique_content);
+            LinesStorage unique_content = LinesArtifactAnalyzer.ExtractUniqueContent(content_map, common_content);
+            uniqueLinesInAllFiles.Add(unique_content);
         }
 
         return uniqueLinesInAllFiles;
     }
 
-    private LinesRepository<LinesStorageSet> ExtractUniqueContent(LinesRepository<LinesStorageSet> target_content_repos, LinesStorageSet common_content)
+    private static LinesStorage ExtractArtifactsFromSource(SourceInfo sourceInfo)
     {
-        LinesRepository<LinesStorageSet> uniqueLinesInAllFiles = new ();
-
-        foreach (LinesStorageSet content_set in target_content_repos.Content)
+        LinesStorage target_content = new ()
         {
-            LinesStorageSet unique_content = LinesArtifactAnalyzer.ExtractUniqueContent(content_set, common_content);
-            uniqueLinesInAllFiles.PutContent(unique_content);
+            Name = sourceInfo.Name,
+        };
+
+        foreach (string stringFromSource in sourceInfo.Content)
+        {
+            if (LinesArtifactAnalyzer.IsArtifact(stringFromSource))
+            {
+                string artifact_string = LinesArtifactAnalyzer.RetrievePreprocessedArtifact(stringFromSource);
+                target_content.PutContent(new LineInfo(artifact_string));
+            }
         }
 
-        return uniqueLinesInAllFiles;
+        return target_content;
+    }
+
+    private List<LinesStorage> ExtractUncommentedContent()
+    {
+        List<LinesStorage> uncommented_content = new ();
+
+        foreach (SourceInfo source in this.customSources)
+        {
+            LinesStorage artifactStorage = ExtractArtifactsFromSource(source);
+            uncommented_content.Add(artifactStorage);
+        }
+
+        return uncommented_content;
     }
 }
 
@@ -215,20 +137,20 @@ public record SourceInfo
 /// <summary>
 /// Represents a result of made analysis of content from source text files.
 /// </summary>
-public record LinesResultView<T>
+public record LinesResultView
 {
     /// <summary>
     /// Gets or sets the repository to keep original content from sources.
     /// </summary>
-    public LinesRepository<T> ContentFromSources { get; set; }
+    public List<LinesStorage> ContentFromSources { get; set; }
 
     /// <summary>
     /// Gets or sets the storage to keep common content for all sources.
     /// </summary>
-    public T CommonContentStorage { get; set; }
+    public LinesStorage CommonContentStorage { get; set; }
 
     /// <summary>
     /// Gets or sets the repository to keep unique content from every source.
     /// </summary>
-    public LinesRepository<T> UniqueContentRepository { get; set; }
+    public List<LinesStorage> UniqueContentRepository { get; set; }
 }
